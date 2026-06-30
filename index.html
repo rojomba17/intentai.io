@@ -105,7 +105,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 9rem 2rem 5rem;
+      padding: 8rem 2rem 4rem;
       z-index: 1;
     }
 
@@ -227,6 +227,124 @@
       transform: translateY(-2px);
     }
 
+    /* ── HERO DEMO WINDOW ── */
+    .hero-demo {
+      width: 100%;
+      max-width: 640px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .demo-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.75rem 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.025);
+    }
+    .demo-dots { display: flex; gap: 5px; }
+    .demo-dots span {
+      width: 9px; height: 9px; border-radius: 50%;
+    }
+    .demo-dots span:nth-child(1) { background: #ff5f57; }
+    .demo-dots span:nth-child(2) { background: #febc2e; }
+    .demo-dots span:nth-child(3) { background: #28c840; }
+    .demo-title-text {
+      flex: 1;
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.28);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.04em;
+    }
+    .demo-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.68rem;
+      color: #4ade80;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .demo-live-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    .demo-body { padding: 0.5rem 0; }
+
+    .demo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0.62rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      opacity: 0;
+      animation: rowslide 0.4s ease-out forwards;
+    }
+    .demo-row:last-child { border-bottom: none; }
+    .demo-row:nth-child(1) { animation-delay: 0.15s; }
+    .demo-row:nth-child(2) { animation-delay: 0.55s; }
+    .demo-row:nth-child(3) { animation-delay: 0.95s; }
+    .demo-row:nth-child(4) { animation-delay: 1.35s; }
+    .demo-row:nth-child(5) { animation-delay: 1.75s; }
+
+    @keyframes rowslide {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .demo-sig-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .demo-sig-dot.g  { background: #4ade80; }
+    .demo-sig-dot.a  { background: #fbbf24; animation: blink 1.5s ease-in-out infinite; }
+    .demo-sig-dot.p  { background: var(--purple); animation: blink 0.8s ease-in-out infinite; }
+
+    .demo-msg {
+      flex: 1;
+      font-size: 0.8rem;
+      color: rgba(240,240,245,0.72);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .demo-msg.scanning { color: rgba(255,255,255,0.22); font-style: italic; }
+
+    .demo-tag {
+      font-size: 0.68rem;
+      font-family: 'Courier New', monospace;
+      padding: 2px 9px;
+      border-radius: 5px;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .demo-tag.pu { background: rgba(124,110,245,0.15); color: #a99ef8; }
+    .demo-tag.bl { background: rgba(99,179,237,0.12); color: #7dd3fc; }
+    .demo-tag.am { background: rgba(251,191,36,0.12); color: #fbbf24; }
+    .demo-tag.gr { background: rgba(74,222,128,0.12); color: #4ade80; }
+
+    .demo-scanning-dots { display: flex; gap: 3px; }
+    .demo-scanning-dots span {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(124,110,245,0.5);
+    }
+    .demo-scanning-dots span:nth-child(1) { animation: blink 1s 0.0s infinite; }
+    .demo-scanning-dots span:nth-child(2) { animation: blink 1s 0.3s infinite; }
+    .demo-scanning-dots span:nth-child(3) { animation: blink 1s 0.6s infinite; }
+
     /* Stats strip */
     .stats {
       display: flex;
@@ -301,17 +419,6 @@
       position: relative;
     }
 
-    /* Connector line */
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 2.5rem;
-      left: calc(16.66% + 1rem);
-      right: calc(16.66% + 1rem);
-      height: 1px;
-      background: linear-gradient(90deg, var(--purple) 0%, rgba(124,110,245,0.2) 100%);
-      z-index: 0;
-    }
 
     .step {
       background: var(--surface);
@@ -604,6 +711,42 @@
   <div class="hero-ctas">
     <a href="mailto:rojomba17@gmail.com?subject=Demo%20Request%20%E2%80%93%20intentai.io" class="btn-primary">Request a demo →</a>
     <a href="#how-it-works" class="btn-ghost">See how it works</a>
+  </div>
+
+  <!-- LIVE PRODUCT DEMO WINDOW -->
+  <div class="hero-demo">
+    <div class="demo-titlebar">
+      <div class="demo-dots"><span></span><span></span><span></span></div>
+      <span class="demo-title-text">intentai · live intent feed</span>
+      <span class="demo-live"><span class="demo-live-dot"></span> live</span>
+    </div>
+    <div class="demo-body">
+      <div class="demo-row">
+        <span class="demo-sig-dot g"></span>
+        <span class="demo-msg">"I can't log in to my account"</span>
+        <span class="demo-tag pu">support_agent</span>
+      </div>
+      <div class="demo-row">
+        <span class="demo-sig-dot g"></span>
+        <span class="demo-msg">"What does the enterprise plan include?"</span>
+        <span class="demo-tag bl">sales_agent</span>
+      </div>
+      <div class="demo-row">
+        <span class="demo-sig-dot a"></span>
+        <span class="demo-msg">"I'm thinking of switching providers..."</span>
+        <span class="demo-tag am">retention_agent</span>
+      </div>
+      <div class="demo-row">
+        <span class="demo-sig-dot g"></span>
+        <span class="demo-msg">"How do I connect my CRM integration?"</span>
+        <span class="demo-tag gr">onboard_agent</span>
+      </div>
+      <div class="demo-row">
+        <span class="demo-sig-dot p"></span>
+        <span class="demo-msg scanning">Analysing incoming signal...</span>
+        <span class="demo-scanning-dots"><span></span><span></span><span></span></span>
+      </div>
+    </div>
   </div>
 
   <div class="stats">
