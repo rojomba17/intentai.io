@@ -846,7 +846,7 @@
     <p>We're onboarding a select group of companies to shape the platform. Join the waitlist and we'll be in touch.</p>
 
     <form class="waitlist-form" onsubmit="handleWaitlist(event)">
-      <input type="email" placeholder="you@company.com" required />
+      <input type="email" name="email" placeholder="you@company.com" required />
       <button type="submit">Join waitlist</button>
     </form>
     <p class="form-note">No spam. Unsubscribe any time.</p>
@@ -863,17 +863,37 @@
 <script>
   lucide.createIcons();
 
-  function handleWaitlist(e) {
+  async function handleWaitlist(e) {
     e.preventDefault();
     const form = e.target;
-    const email = form.querySelector('input[type="email"]').value;
     const btn = form.querySelector('button');
-    window.location.href =
-      'mailto:rojomba17@gmail.com?subject=Waitlist%20%E2%80%93%20intentai.io&body=Please%20add%20me%20to%20the%20waitlist%3A%20' +
-      encodeURIComponent(email);
-    btn.textContent = 'Request sent ✓';
-    btn.style.background = '#22c55e';
+    const email = form.querySelector('input[type="email"]').value;
+
+    btn.textContent = 'Sending...';
     btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/mvzjbene', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (res.ok) {
+        btn.textContent = "You're on the list ✓";
+        btn.style.background = '#22c55e';
+        form.querySelector('input').value = '';
+      } else {
+        throw new Error();
+      }
+    } catch {
+      btn.textContent = 'Try again';
+      btn.style.background = '#ef4444';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'Join waitlist';
+        btn.style.background = '';
+      }, 3000);
+    }
   }
 </script>
 
