@@ -683,6 +683,86 @@
       .modal-box { border-radius: 16px; }
     }
 
+    /* ── DEMO REQUEST MODAL ── */
+    .demo-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      z-index: 300;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+    .demo-overlay.open { opacity: 1; pointer-events: all; }
+    .demo-modal-box {
+      background: #0d0d1a;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      width: 100%; max-width: 480px;
+      transform: scale(0.95) translateY(16px);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .demo-overlay.open .demo-modal-box { transform: scale(1) translateY(0); }
+
+    .demo-modal-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 1.75rem 1.75rem 1.25rem; gap: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .demo-modal-head h2 {
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 0.3rem;
+    }
+    .demo-modal-head p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    .demo-form {
+      padding: 1.5rem 1.75rem 1.75rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .demo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .demo-field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .demo-field label {
+      font-size: 0.73rem; font-weight: 600;
+      color: rgba(255,255,255,0.45); letter-spacing: 0.03em;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .demo-opt { font-size: 0.63rem; color: rgba(255,255,255,0.22); font-weight: 400; }
+    .demo-field input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 9px; padding: 0.65rem 0.875rem;
+      color: var(--text); font-size: 0.875rem;
+      outline: none; transition: border-color 0.2s;
+      font-family: inherit; width: 100%;
+    }
+    .demo-field input::placeholder { color: var(--faint); }
+    .demo-field input:focus { border-color: rgba(124,110,245,0.5); }
+    .demo-submit {
+      background: var(--purple); color: #fff; border: none;
+      padding: 0.75rem; border-radius: 10px;
+      font-size: 0.925rem; font-weight: 600; cursor: pointer;
+      width: 100%; font-family: inherit; margin-top: 0.25rem;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .demo-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+    .demo-success {
+      text-align: center; padding: 2.5rem 1.75rem;
+    }
+    .demo-success-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; font-size: 1.25rem;
+    }
+    .demo-success h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+    .demo-success p { font-size: 0.85rem; color: var(--muted); }
+    @media (max-width: 480px) {
+      .demo-row { grid-template-columns: 1fr; }
+      .demo-modal-head { padding: 1.25rem 1.25rem 1rem; }
+      .demo-form { padding: 1.25rem 1.25rem 1.5rem; }
+    }
+
     .use-case .icon-box {
       width: 44px;
       height: 44px;
@@ -858,7 +938,7 @@
     <li><a href="#use-cases">Capabilities</a></li>
     <li><a href="#waitlist">Early access</a></li>
   </ul>
-  <a href="mailto:rojomba17@gmail.com?subject=Demo%20Request%20%E2%80%93%20intentai.io" class="btn-nav">Request a demo</a>
+  <a href="#" onclick="event.preventDefault();openDemoModal()" class="btn-nav">Request a demo</a>
 </nav>
 
 <!-- HERO -->
@@ -881,7 +961,7 @@
   </p>
 
   <div class="hero-ctas">
-    <a href="mailto:rojomba17@gmail.com?subject=Demo%20Request%20%E2%80%93%20intentai.io" class="btn-primary">Request a demo →</a>
+    <a href="#" onclick="event.preventDefault();openDemoModal()" class="btn-primary">Request a demo →</a>
     <a href="#how-it-works" class="btn-ghost">See how it works</a>
   </div>
 
@@ -1031,9 +1111,47 @@
   </div>
 </div>
 
-<!-- MODAL OVERLAY -->
+<!-- USE CASE MODAL -->
 <div id="modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div id="modal-content" class="modal-box"></div>
+</div>
+
+<!-- DEMO REQUEST MODAL -->
+<div id="demo-overlay" class="demo-overlay" onclick="if(event.target===this)closeDemoModal()">
+  <div class="demo-modal-box">
+    <div class="demo-modal-head">
+      <div>
+        <h2>Request a demo</h2>
+        <p>Tell us a bit about yourself and we'll be in touch within 24 hours.</p>
+      </div>
+      <button class="modal-close" onclick="closeDemoModal()">✕</button>
+    </div>
+    <div id="demo-form-wrap">
+      <form class="demo-form" id="demo-form" onsubmit="handleDemoSubmit(event)">
+        <input type="hidden" name="_subject" value="Demo Request – intentai.io" />
+        <input type="hidden" name="type" value="demo_request" />
+        <div class="demo-row">
+          <div class="demo-field">
+            <label>First name</label>
+            <input type="text" name="first_name" placeholder="Alex" required />
+          </div>
+          <div class="demo-field">
+            <label>Last name <span class="demo-opt">optional</span></label>
+            <input type="text" name="last_name" placeholder="Johnson" />
+          </div>
+        </div>
+        <div class="demo-field">
+          <label>Work email</label>
+          <input type="email" name="email" placeholder="alex@company.com" required />
+        </div>
+        <div class="demo-field">
+          <label>Company <span class="demo-opt">optional</span></label>
+          <input type="text" name="company" placeholder="Acme Inc." />
+        </div>
+        <button type="submit" class="demo-submit">Request a demo →</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -1181,7 +1299,7 @@
         <div class="modal-caps">${capsHTML}</div>
         <div class="modal-cta">
           <p>Ready to deploy ${d.agent} for your team?</p>
-          <a href="mailto:rojomba17@gmail.com?subject=Demo – ${d.title} – intentai.io">Request a demo →</a>
+          <a href="#" onclick="event.preventDefault();closeModal();openDemoModal()">Request a demo &rarr;</a>
         </div>
       </div>`;
     lucide.createIcons();
@@ -1194,7 +1312,44 @@
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeDemoModal(); } });
+
+  function openDemoModal() {
+    document.getElementById('demo-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDemoModal() {
+    document.getElementById('demo-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  async function handleDemoSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const data = Object.fromEntries(new FormData(form));
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/mvzjbene', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        document.getElementById('demo-form-wrap').innerHTML = `
+          <div class="demo-success">
+            <div class="demo-success-icon">✓</div>
+            <h3>We'll be in touch soon!</h3>
+            <p>Expect to hear from us within 24 hours.</p>
+          </div>`;
+      } else { throw new Error(); }
+    } catch {
+      btn.textContent = 'Try again';
+      btn.style.background = '#ef4444';
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Request a demo →'; btn.style.background = ''; }, 3000);
+    }
+  }
 
   async function handleWaitlist(e) {
     e.preventDefault();
