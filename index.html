@@ -488,6 +488,225 @@
       font-size: 0.875rem;
       line-height: 1.7;
     }
+    .step { cursor: pointer; }
+    .step-explore {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.76rem; font-weight: 650; color: var(--purple);
+      margin-top: 1.1rem; letter-spacing: 0.01em; transition: gap 0.2s;
+    }
+    .step:hover .step-explore { gap: 0.65rem; }
+
+    /* ── STEP MODALS ── */
+    .step-overlay {
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,0.72); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .step-overlay.open { opacity: 1; pointer-events: auto; }
+    .step-modal-box {
+      background: #0b0b18; border: 1px solid var(--border);
+      border-radius: 20px; width: 100%; max-width: 700px;
+      max-height: 90vh; overflow-y: auto;
+      transform: scale(0.94) translateY(18px);
+      transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .step-overlay.open .step-modal-box { transform: scale(1) translateY(0); }
+
+    .step-modal-head {
+      padding: 1.75rem 2rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .step-modal-stepnum {
+      font-size: 0.68rem; font-weight: 750; color: var(--purple);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.35rem;
+    }
+    .step-modal-head h2 { font-size: 1.55rem; font-weight: 730; letter-spacing: -0.025em; margin-bottom: 0.2rem; }
+    .step-modal-head .step-modal-sub { color: var(--muted); font-size: 0.875rem; }
+
+    /* ── ANIM WINDOW (the live snippet) ── */
+    .anim-window {
+      margin: 1.5rem 2rem;
+      background: #060611;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; overflow: hidden;
+    }
+    .anim-titlebar {
+      background: rgba(255,255,255,0.035);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0.65rem 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .anim-dots { display: flex; gap: 5px; }
+    .anim-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .anim-dots span:nth-child(1) { background: #ff5f57; }
+    .anim-dots span:nth-child(2) { background: #febc2e; }
+    .anim-dots span:nth-child(3) { background: #28c840; }
+    .anim-title-text { font-size: 0.7rem; color: var(--muted); font-weight: 500; letter-spacing: 0.04em; flex: 1; }
+    .anim-live { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: #22c55e; font-weight: 650; }
+    .anim-live-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: npulse 1.4s ease-in-out infinite; }
+    .anim-body { padding: 1.25rem; min-height: 170px; }
+
+    /* ── DETECT animation ── */
+    @keyframes sigSlideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes barGrow { from { width: 0; } }
+    .sig-feed { display: flex; flex-direction: column; gap: 0.55rem; }
+    .sig-row {
+      display: grid; grid-template-columns: 76px 1fr auto;
+      align-items: center; gap: 0.75rem;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 9px; padding: 0.55rem 0.9rem;
+      opacity: 0; animation: sigSlideIn 0.45s ease both;
+    }
+    .sig-row:nth-child(1) { animation-delay: 0.15s; }
+    .sig-row:nth-child(2) { animation-delay: 0.7s; }
+    .sig-row:nth-child(3) { animation-delay: 1.25s; }
+    .sig-row:nth-child(4) { animation-delay: 1.8s; }
+    .sig-channel {
+      font-size: 0.62rem; font-weight: 750; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--muted);
+      padding: 2px 6px; border-radius: 4px;
+      background: rgba(255,255,255,0.05); text-align: center; white-space: nowrap;
+    }
+    .sig-msg { font-size: 0.79rem; color: var(--text); font-style: italic; }
+    .sig-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .sig-intent {
+      font-size: 0.62rem; font-weight: 750;
+      padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.02em;
+    }
+    .sig-bar-wrap { width: 60px; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .sig-bar { height: 100%; border-radius: 2px; animation: barGrow 0.7s ease both; }
+    .sig-row:nth-child(1) .sig-bar { animation-delay: 0.5s; }
+    .sig-row:nth-child(2) .sig-bar { animation-delay: 1.05s; }
+    .sig-row:nth-child(3) .sig-bar { animation-delay: 1.6s; }
+    .sig-row:nth-child(4) .sig-bar { animation-delay: 2.15s; }
+
+    /* ── ROUTE animation ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(7px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .route-signal {
+      background: rgba(124,110,245,0.07); border: 1px solid rgba(124,110,245,0.18);
+      border-radius: 9px; padding: 0.75rem 1rem; margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.4s ease 0.1s both;
+    }
+    .route-signal-label { font-size: 0.62rem; color: var(--purple); font-weight: 750; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 0.3rem; }
+    .route-signal-text { font-size: 0.82rem; color: var(--text); font-style: italic; }
+    .route-classify { margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.4s ease 0.5s both; }
+    .route-classify-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.45rem; display: flex; justify-content: space-between; }
+    .route-classify-label span { color: var(--purple-light); font-weight: 650; }
+    .route-bar-wrap { height: 7px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; }
+    .route-bar { height: 100%; width: 94%; background: linear-gradient(90deg, #7c6ef5, #a99ef8); border-radius: 4px; animation: barGrow 1.1s ease 0.75s both; }
+    .route-steps { display: flex; flex-direction: column; gap: 0.45rem; }
+    .route-step {
+      display: flex; align-items: center; gap: 0.7rem;
+      opacity: 0; animation: fadeUp 0.35s ease both;
+    }
+    .route-step:nth-child(1) { animation-delay: 1.5s; }
+    .route-step:nth-child(2) { animation-delay: 1.85s; }
+    .route-step:nth-child(3) { animation-delay: 2.2s; }
+    .route-step:nth-child(4) { animation-delay: 2.55s; }
+    .route-step:nth-child(5) { animation-delay: 2.9s; }
+    .route-step-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .route-step-label { color: var(--muted); font-size: 0.72rem; min-width: 130px; }
+    .route-step-val { font-weight: 650; font-size: 0.78rem; }
+    .route-step-badge {
+      font-size: 0.62rem; font-weight: 750; padding: 2px 8px; border-radius: 4px;
+      background: rgba(34,197,94,0.12); color: #22c55e; margin-left: auto;
+    }
+
+    /* ── ACTIVATE animation ── */
+    @keyframes tickIn {
+      from { opacity: 0; transform: scale(0.75); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .act-header {
+      font-size: 0.72rem; color: var(--muted); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeUp 0.4s ease 0.1s both;
+    }
+    .act-agent-badge {
+      font-size: 0.62rem; font-weight: 750; padding: 2px 8px; border-radius: 4px;
+      background: rgba(124,110,245,0.15); color: var(--purple-light);
+    }
+    .act-timeline { display: flex; flex-direction: column; position: relative; }
+    .act-row {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 0 0 0.75rem 0; position: relative;
+      opacity: 0; animation: tickIn 0.35s ease both;
+    }
+    .act-row:nth-child(1) { animation-delay: 0.35s; }
+    .act-row:nth-child(2) { animation-delay: 0.85s; }
+    .act-row:nth-child(3) { animation-delay: 1.35s; }
+    .act-row:nth-child(4) { animation-delay: 1.85s; }
+    .act-row:nth-child(5) { animation-delay: 2.35s; }
+    .act-row:nth-child(6) { animation-delay: 2.85s; }
+    .act-row:last-child { padding-bottom: 0; }
+    .act-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .act-dot {
+      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(124,110,245,0.12); border: 1px solid rgba(124,110,245,0.35);
+      display: flex; align-items: center; justify-content: center; z-index: 1;
+    }
+    .act-dot svg { width: 12px; height: 12px; stroke: #a99ef8; stroke-width: 2; fill: none; }
+    .act-row:last-child .act-dot { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.35); }
+    .act-row:last-child .act-dot svg { stroke: #22c55e; }
+    .act-connector { width: 1px; flex: 1; background: rgba(124,110,245,0.18); min-height: 12px; margin: 3px 0; }
+    .act-row:last-child .act-connector { display: none; }
+    .act-right { padding-top: 3px; }
+    .act-time { font-size: 0.62rem; color: var(--muted); font-family: 'Courier New', monospace; margin-bottom: 1px; }
+    .act-label { font-size: 0.82rem; color: var(--text); }
+    .act-row:last-child .act-label { color: #22c55e; font-weight: 650; }
+    .act-result {
+      margin-top: 0.85rem; padding: 0.6rem 1rem;
+      background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18);
+      border-radius: 9px; font-size: 0.8rem; color: #22c55e; font-weight: 650;
+      opacity: 0; animation: tickIn 0.4s ease 3.4s both; text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── STEP STATS BAR ── */
+    .step-stats {
+      display: flex; margin: 0 2rem 1.5rem;
+      background: rgba(255,255,255,0.025); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .step-stat { flex: 1; padding: 1rem 1.25rem; text-align: center; border-right: 1px solid var(--border); }
+    .step-stat:last-child { border-right: none; }
+    .step-stat-val { font-size: 1.45rem; font-weight: 760; color: var(--purple-light); letter-spacing: -0.02em; }
+    .step-stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── STEP MODAL BODY ── */
+    .step-body { padding: 0 2rem 0.5rem; }
+    .step-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.78; margin-bottom: 1.5rem; }
+    .step-details { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 0.5rem; }
+    .step-detail-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .step-detail-card:hover { border-color: var(--border-hover); }
+    .step-detail-card h4 { font-size: 0.875rem; font-weight: 670; margin-bottom: 0.35rem; }
+    .step-detail-card p { font-size: 0.825rem; color: var(--muted); line-height: 1.65; }
+    .step-modal-cta {
+      margin: 1.5rem 2rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1.25rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem;
+    }
+    .step-modal-cta p { font-size: 0.85rem; color: var(--muted); }
+    .step-modal-cta a {
+      background: var(--purple); color: #fff;
+      padding: 0.6rem 1.3rem; border-radius: 9px;
+      font-size: 0.875rem; font-weight: 620;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .step-modal-cta a:hover { opacity: 0.85; }
 
     /* ── USE CASES ── */
     .use-cases-grid {
@@ -1026,23 +1245,26 @@
   <p class="section-sub">Three steps. Zero human routing. The right agent, every time.</p>
 
   <div class="steps">
-    <div class="step">
+    <div class="step" onclick="openStepModal('detect')">
       <div class="step-num">Step 01</div>
       <div class="icon-box"><i data-lucide="scan-search"></i></div>
       <h3>Detect</h3>
       <p>Capture customer signals across every channel — chat, email, behaviour, voice — and surface intent the moment it emerges.</p>
+      <span class="step-explore">See it in action →</span>
     </div>
-    <div class="step">
+    <div class="step" onclick="openStepModal('route')">
       <div class="step-num">Step 02</div>
       <div class="icon-box"><i data-lucide="share-2"></i></div>
       <h3>Route</h3>
       <p>Our intent engine classifies the signal and selects the optimal specialised AI agent — matched to context, urgency, and desired outcome.</p>
+      <span class="step-explore">See it in action →</span>
     </div>
-    <div class="step">
+    <div class="step" onclick="openStepModal('activate')">
       <div class="step-num">Step 03</div>
       <div class="icon-box"><i data-lucide="zap"></i></div>
       <h3>Activate</h3>
       <p>The right agent acts instantly — resolving, qualifying, onboarding, or retaining — autonomously, without waiting for a human handoff.</p>
+      <span class="step-explore">See it in action →</span>
     </div>
   </div>
 </div>
@@ -1108,6 +1330,13 @@
       <button type="submit">Join waitlist</button>
     </form>
     <p class="form-note">No spam. Unsubscribe any time.</p>
+  </div>
+</div>
+
+<!-- STEP MODAL -->
+<div id="step-overlay" class="step-overlay" onclick="if(event.target===this)closeStepModal()">
+  <div class="step-modal-box">
+    <div id="step-modal-content"></div>
   </div>
 </div>
 
@@ -1312,7 +1541,181 @@
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeDemoModal(); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeDemoModal(); closeStepModal(); } });
+
+  /* ── STEP MODALS DATA ── */
+  const STEP_MODALS = {
+    detect: {
+      stepNum: 'Step 01', title: 'Detect', icon: 'scan-search',
+      subtitle: 'Every signal. Every channel. In real time.',
+      animLabel: 'signal detector',
+      stats: [
+        { value: '<150ms', label: 'Detection latency' },
+        { value: '50+', label: 'Signal sources' },
+        { value: '97%', label: 'Intent accuracy' },
+      ],
+      description: 'intentai listens across every customer touchpoint — live chat, email threads, browsing behaviour, voice transcripts, CRM notes — and surfaces underlying intent before the customer has to repeat themselves. No polling. No batching. Intent the moment it emerges.',
+      details: [
+        { title: 'Omnichannel ingestion', body: 'Connect any channel via webhook, SDK, or 50+ native integrations. Chat, email, in-app events, voice — no signal goes unnoticed, regardless of where your customers are.' },
+        { title: 'Real-time NLP classification', body: 'Transformer-based intent models run in under 150ms, even on ambiguous or multi-intent phrasing. Trained on your domain, not generic chat data.' },
+        { title: 'Contextual enrichment', body: 'Every detection is enriched with prior session history, CRM data, product usage, and account health signals — so you\'re acting on full context, not just the latest message.' },
+      ],
+      signals: [
+        { channel: 'chat', msg: '"I can\'t log in to my account"', intent: 'support', conf: 96, color: '#a99ef8', bg: 'rgba(124,110,245,0.15)' },
+        { channel: 'email', msg: '"Looking to upgrade our plan"', intent: 'purchase', conf: 91, color: '#22c55e', bg: 'rgba(34,197,94,0.12)' },
+        { channel: 'behavior', msg: '3rd visit to /pricing in 48h', intent: 'high_intent', conf: 88, color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
+        { channel: 'voice', msg: '"Cancel my subscription"', intent: 'churn_risk', conf: 94, color: '#ef4444', bg: 'rgba(239,68,68,0.12)' },
+      ]
+    },
+    route: {
+      stepNum: 'Step 02', title: 'Route', icon: 'share-2',
+      subtitle: 'Zero-latency. Zero mis-routes. Always the right agent.',
+      animLabel: 'routing engine',
+      stats: [
+        { value: '99.2%', label: 'Routing accuracy' },
+        { value: '<50ms', label: 'Decision time' },
+        { value: '12+', label: 'Specialist agents' },
+      ],
+      description: 'The intent engine scores each signal against a taxonomy of 200+ outcomes, selects the best-fit specialist agent, injects full context, and fires the activation handoff — all before a human has read the notification.',
+      details: [
+        { title: 'Intent taxonomy & scoring', body: '200+ pre-built intent categories across support, sales, onboarding, retention, and internal ops. Train new intents with as few as 10 labelled examples — no ML team needed.' },
+        { title: 'Confidence thresholds & escalation', body: 'Set per-intent confidence floors. Signals that fall below threshold auto-escalate to a human with full context pre-loaded — never a cold handoff.' },
+        { title: 'Multi-agent orchestration', body: 'Complex journeys activate multiple specialist agents in sequence. Each agent knows what the last one did, creating seamless, stateful customer experiences across the entire lifecycle.' },
+      ],
+      routeSteps: [
+        { label: 'Intent classified', val: 'support · password_reset', color: '#7c6ef5' },
+        { label: 'Confidence scored', val: '94% — above threshold', color: '#a99ef8' },
+        { label: 'Agent matched', val: 'support_agent v2.4', color: '#22c55e' },
+        { label: 'Context injected', val: 'CRM + last 3 sessions', color: '#38bdf8' },
+        { label: 'Dispatched', val: '48ms', color: '#f59e0b', badge: '✓ Live' },
+      ]
+    },
+    activate: {
+      stepNum: 'Step 03', title: 'Activate', icon: 'zap',
+      subtitle: 'From intent to outcome. Autonomously.',
+      animLabel: 'agent workspace',
+      stats: [
+        { value: '2.3s', label: 'Avg. time to action' },
+        { value: '78%', label: 'Auto-resolved' },
+        { value: '0', label: 'Human handoffs needed' },
+      ],
+      description: 'The activated agent arrives with full context, tool access, and policy-scoped authority to act. It resolves, qualifies, onboards, or retains — and logs every step for audit and continuous improvement. No warmup. No waiting.',
+      details: [
+        { title: 'Deep tool integrations', body: 'Agents connect to your CRM, helpdesk, payment systems, product database, and internal APIs to take real action — not just craft replies. Every action is logged and reversible.' },
+        { title: 'Policy guardrails & escalation', body: 'Every agent action runs through a configurable policy layer. Anything outside scope is instantly escalated to a human with the full session context pre-loaded and an action recommendation ready.' },
+        { title: 'Continuous improvement loop', body: 'Every resolved case — successful or escalated — feeds back into the model. Resolution rates, CSAT scores, and escalation patterns improve automatically with each interaction.' },
+      ],
+      timeline: [
+        { ms: '0ms',   label: 'Agent activated',        icon: 'zap' },
+        { ms: '120ms', label: 'Account located',         icon: 'search' },
+        { ms: '340ms', label: 'Root cause identified',   icon: 'scan-search' },
+        { ms: '890ms', label: 'Fix applied automatically', icon: 'check-circle' },
+        { ms: '1.2s',  label: 'Customer notified',       icon: 'send' },
+        { ms: '2.3s',  label: 'Ticket auto-closed ✓',   icon: 'shield-check' },
+      ]
+    }
+  };
+
+  function openStepModal(id) {
+    const d = STEP_MODALS[id];
+    if (!d) return;
+
+    /* Build animation HTML per step */
+    let animHTML = '';
+    if (id === 'detect') {
+      animHTML = `<div class="sig-feed">${d.signals.map(s => `
+        <div class="sig-row">
+          <span class="sig-channel">${s.channel}</span>
+          <span class="sig-msg">${s.msg}</span>
+          <div class="sig-right">
+            <span class="sig-intent" style="background:${s.bg};color:${s.color}">${s.intent}</span>
+            <div class="sig-bar-wrap"><div class="sig-bar" style="width:${s.conf}%;background:${s.color}"></div></div>
+          </div>
+        </div>`).join('')}</div>`;
+    } else if (id === 'route') {
+      animHTML = `
+        <div class="route-signal">
+          <div class="route-signal-label">Incoming signal</div>
+          <div class="route-signal-text">"I can't log in to my account" &nbsp;·&nbsp; chat &nbsp;·&nbsp; just now</div>
+        </div>
+        <div class="route-classify">
+          <div class="route-classify-label">Classifying intent… <span>94% confidence</span></div>
+          <div class="route-bar-wrap"><div class="route-bar"></div></div>
+        </div>
+        <div class="route-steps">${d.routeSteps.map(rs => `
+          <div class="route-step">
+            <div class="route-step-dot" style="background:${rs.color}"></div>
+            <span class="route-step-label">${rs.label}</span>
+            <span class="route-step-val" style="color:${rs.color}">${rs.val}</span>
+            ${rs.badge ? `<span class="route-step-badge">${rs.badge}</span>` : ''}
+          </div>`).join('')}</div>`;
+    } else if (id === 'activate') {
+      animHTML = `
+        <div class="act-header">
+          <span class="act-agent-badge">support_agent v2.4</span> executing resolution sequence
+        </div>
+        <div class="act-timeline">${d.timeline.map(t => `
+          <div class="act-row">
+            <div class="act-left">
+              <div class="act-dot"><i data-lucide="${t.icon}"></i></div>
+              <div class="act-connector"></div>
+            </div>
+            <div class="act-right">
+              <div class="act-time">${t.ms}</div>
+              <div class="act-label">${t.label}</div>
+            </div>
+          </div>`).join('')}</div>
+        <div class="act-result">✓ &nbsp; Resolution complete &nbsp;·&nbsp; 2.3s &nbsp;·&nbsp; 0 escalations &nbsp;·&nbsp; CSAT: 5★</div>`;
+    }
+
+    const statsHTML = d.stats.map(s => `
+      <div class="step-stat">
+        <div class="step-stat-val">${s.value}</div>
+        <div class="step-stat-label">${s.label}</div>
+      </div>`).join('');
+
+    const detailsHTML = d.details.map(det => `
+      <div class="step-detail-card">
+        <h4>${det.title}</h4>
+        <p>${det.body}</p>
+      </div>`).join('');
+
+    document.getElementById('step-modal-content').innerHTML = `
+      <div class="step-modal-head">
+        <div>
+          <div class="step-modal-stepnum">${d.stepNum} &nbsp;·&nbsp; How it works</div>
+          <h2>${d.title}</h2>
+          <p class="step-modal-sub">${d.subtitle}</p>
+        </div>
+        <button class="modal-close" onclick="closeStepModal()">✕</button>
+      </div>
+      <div class="anim-window">
+        <div class="anim-titlebar">
+          <div class="anim-dots"><span></span><span></span><span></span></div>
+          <span class="anim-title-text">intentai &nbsp;·&nbsp; ${d.animLabel}</span>
+          <span class="anim-live"><span class="anim-live-dot"></span> live</span>
+        </div>
+        <div class="anim-body">${animHTML}</div>
+      </div>
+      <div class="step-stats">${statsHTML}</div>
+      <div class="step-body">
+        <p class="step-desc">${d.description}</p>
+        <div class="step-details">${detailsHTML}</div>
+      </div>
+      <div class="step-modal-cta">
+        <p>Want to see ${d.title.toLowerCase()} in action for your team?</p>
+        <a href="#" onclick="event.preventDefault();closeStepModal();openDemoModal()">Request a demo →</a>
+      </div>`;
+
+    lucide.createIcons();
+    document.getElementById('step-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeStepModal() {
+    document.getElementById('step-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   function openDemoModal() {
     document.getElementById('demo-overlay').classList.add('open');
