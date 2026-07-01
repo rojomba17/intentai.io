@@ -503,12 +503,184 @@
       border-radius: 14px;
       padding: 1.5rem;
       transition: border-color 0.25s, transform 0.25s, background 0.25s;
-      cursor: default;
+      cursor: pointer;
+      position: relative;
     }
     .use-case:hover {
       border-color: var(--border-hover);
       background: var(--surface-hover);
       transform: translateY(-4px);
+    }
+    .use-case-explore {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--purple);
+      margin-top: 0.875rem;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .use-case:hover .use-case-explore {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: #0d0d1a;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 740px;
+      max-height: 88vh;
+      overflow-y: auto;
+      transform: scale(0.95) translateY(16px);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      scrollbar-width: none;
+    }
+    .modal-box::-webkit-scrollbar { display: none; }
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 1.75rem 2rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      gap: 1rem;
+    }
+    .modal-header-left { display: flex; align-items: center; gap: 1rem; }
+    .modal-icon-box {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, rgba(124,110,245,0.25), rgba(124,110,245,0.07));
+      border: 1px solid rgba(124,110,245,0.3);
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .modal-icon-box svg { width: 22px; height: 22px; stroke: #a99ef8; stroke-width: 1.75; fill: none; }
+    .modal-header-text h2 {
+      font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 0.3rem;
+    }
+    .modal-agent-tag {
+      font-size: 0.7rem; font-family: 'Courier New', monospace;
+      color: var(--purple-light);
+      background: rgba(124,110,245,0.12);
+      border: 1px solid rgba(124,110,245,0.22);
+      padding: 2px 9px; border-radius: 5px; font-weight: 600;
+    }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent; color: var(--muted);
+      cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s; flex-shrink: 0;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+
+    .modal-body { padding: 1.75rem 2rem 2rem; }
+    .modal-tagline {
+      font-size: 1rem; font-weight: 600;
+      color: var(--purple-light); margin-bottom: 0.6rem; letter-spacing: -0.01em;
+    }
+    .modal-desc {
+      font-size: 0.875rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem;
+    }
+    .modal-section-label {
+      font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.28);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+
+    /* Workflow pipeline */
+    .modal-workflow {
+      display: flex; gap: 0; margin-bottom: 2.25rem;
+      overflow-x: auto; padding-bottom: 0.5rem; scrollbar-width: none;
+    }
+    .modal-workflow::-webkit-scrollbar { display: none; }
+    .wf-step {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1; min-width: 90px; position: relative;
+    }
+    .wf-step:not(:last-child)::after {
+      content: '';
+      position: absolute; top: 14px; left: 50%; width: 100%; height: 1px;
+      background: linear-gradient(90deg, rgba(124,110,245,0.5), rgba(124,110,245,0.1));
+    }
+    .wf-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(124,110,245,0.15);
+      border: 1px solid rgba(124,110,245,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.62rem; font-weight: 700; color: var(--purple-light);
+      position: relative; z-index: 1; margin-bottom: 0.5rem; flex-shrink: 0;
+    }
+    .wf-label {
+      font-size: 0.7rem; font-weight: 650; color: var(--text);
+      text-align: center; margin-bottom: 0.2rem; padding: 0 0.2rem;
+    }
+    .wf-detail {
+      font-size: 0.63rem; color: var(--muted);
+      text-align: center; padding: 0 0.2rem; line-height: 1.5;
+    }
+
+    /* Capabilities */
+    .modal-caps { display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem; }
+    .modal-cap {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.825rem; color: var(--muted);
+    }
+    .modal-cap::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--purple); flex-shrink: 0;
+    }
+
+    /* Modal CTA */
+    .modal-cta {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .modal-cta p { font-size: 0.85rem; color: var(--muted); }
+    .modal-cta a {
+      background: var(--purple); color: #fff;
+      padding: 0.6rem 1.3rem; border-radius: 9px;
+      font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .modal-cta a:hover { opacity: 0.85; }
+
+    @media (max-width: 600px) {
+      .modal-header { padding: 1.25rem 1.25rem 1rem; }
+      .modal-body { padding: 1.25rem 1.25rem 1.5rem; }
+      .modal-caps { grid-template-columns: 1fr; }
+      .wf-step { min-width: 75px; }
+      .modal-box { border-radius: 16px; }
     }
 
     .use-case .icon-box {
@@ -804,35 +976,41 @@
   <p class="section-sub">Across the full customer journey, intentai deploys the agent that fits the moment.</p>
 
   <div class="use-cases-grid">
-    <div class="use-case">
+    <div class="use-case" onclick="openModal('support')">
       <div class="icon-box"><i data-lucide="headphones"></i></div>
       <h4>Support resolution</h4>
       <p>Detect help-seeking intent and route to a support agent that resolves without escalation.</p>
+      <span class="use-case-explore">Explore workflow →</span>
     </div>
-    <div class="use-case">
+    <div class="use-case" onclick="openModal('purchase')">
       <div class="icon-box"><i data-lucide="trending-up"></i></div>
       <h4>Purchase intent</h4>
       <p>Spot buying signals early and activate a sales agent to guide the customer to conversion.</p>
+      <span class="use-case-explore">Explore workflow →</span>
     </div>
-    <div class="use-case">
+    <div class="use-case" onclick="openModal('onboarding')">
       <div class="icon-box"><i data-lucide="user-plus"></i></div>
       <h4>Onboarding</h4>
       <p>Identify new-user confusion and deploy a guided onboarding agent before drop-off happens.</p>
+      <span class="use-case-explore">Explore workflow →</span>
     </div>
-    <div class="use-case">
+    <div class="use-case" onclick="openModal('churn')">
       <div class="icon-box"><i data-lucide="shield-check"></i></div>
       <h4>Churn prevention</h4>
       <p>Detect disengagement signals and trigger a retention agent to re-engage at the right moment.</p>
+      <span class="use-case-explore">Explore workflow →</span>
     </div>
-    <div class="use-case">
+    <div class="use-case" onclick="openModal('leads')">
       <div class="icon-box"><i data-lucide="filter"></i></div>
       <h4>Lead qualification</h4>
       <p>Surface high-intent prospects instantly and route them to a qualification agent before interest fades.</p>
+      <span class="use-case-explore">Explore workflow →</span>
     </div>
-    <div class="use-case">
+    <div class="use-case" onclick="openModal('internal')">
       <div class="icon-box"><i data-lucide="workflow"></i></div>
       <h4>Internal workflows</h4>
       <p>Route employee requests — IT, HR, ops — to the right internal agent without manual triage.</p>
+      <span class="use-case-explore">Explore workflow →</span>
     </div>
   </div>
 </div>
@@ -853,6 +1031,11 @@
   </div>
 </div>
 
+<!-- MODAL OVERLAY -->
+<div id="modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div id="modal-content" class="modal-box"></div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo">intent<span>ai</span>.io</a>
@@ -862,6 +1045,156 @@
 
 <script>
   lucide.createIcons();
+
+  const MODALS = {
+    support: {
+      lucide: 'headphones', title: 'Support resolution', agent: 'support_agent',
+      tagline: 'Resolve instantly. Escalate only when it matters.',
+      description: 'intentai\'s support agent detects help-seeking intent across every channel — chat, email, in-app — the moment it emerges. It classifies the issue type, searches your knowledge base in milliseconds, crafts a personalised resolution, and closes the loop automatically. Human agents are only looped in when confidence falls below your threshold.',
+      workflow: [
+        { num: '01', label: 'Signal captured', detail: '"Can\'t log in" detected via chat' },
+        { num: '02', label: 'Intent classified', detail: 'help_request: account_access (0.96)' },
+        { num: '03', label: 'Knowledge retrieved', detail: '3 relevant articles in 12ms' },
+        { num: '04', label: 'Resolution drafted', detail: 'Personalised response generated' },
+        { num: '05', label: 'Ticket auto-closed', detail: 'CSAT score logged, resolved: true' },
+      ],
+      capabilities: [
+        'Multi-channel signal capture', 'Real-time knowledge base search',
+        'Auto-escalation on low confidence', 'CSAT and resolution tracking',
+        'Zendesk, Intercom, Freshdesk sync', 'Multilingual support',
+      ]
+    },
+    purchase: {
+      lucide: 'trending-up', title: 'Purchase intent', agent: 'sales_agent',
+      tagline: 'Catch buying signals before they go cold.',
+      description: 'When a customer shows purchase intent — browsing pricing pages, comparing plans, asking product questions — intentai\'s sales agent activates instantly. It enriches the lead, scores ICP fit, crafts a personalised pitch, and updates your CRM, all before a human SDR even gets the notification.',
+      workflow: [
+        { num: '01', label: 'Signal captured', detail: 'Pricing page visited 3× in 5 min' },
+        { num: '02', label: 'Intent scored', detail: 'purchase_intent: high (0.91)' },
+        { num: '03', label: 'Lead enriched', detail: 'Company, role, ICP fit: 87/100' },
+        { num: '04', label: 'Pitch crafted', detail: 'Personalised to use case + company' },
+        { num: '05', label: 'CRM updated', detail: 'Opportunity created in Salesforce' },
+      ],
+      capabilities: [
+        'Behavioural signal detection', 'Lead enrichment via Clearbit, Apollo',
+        'ICP fit scoring', 'Personalised outreach generation',
+        'Salesforce, HubSpot integration', 'Pipeline velocity tracking',
+      ]
+    },
+    onboarding: {
+      lucide: 'user-plus', title: 'Onboarding', agent: 'onboard_agent',
+      tagline: 'Guide every new user to their first "aha" moment.',
+      description: 'Drop-off during onboarding is one of the biggest growth levers in SaaS. intentai detects when new users are confused, stuck, or idle — and deploys a guided onboarding agent before they abandon. It adapts the journey to each user\'s persona, plan, and prior steps taken.',
+      workflow: [
+        { num: '01', label: 'Signal captured', detail: 'User idle 4 min on setup screen' },
+        { num: '02', label: 'Friction detected', detail: 'onboarding_stuck (0.88)' },
+        { num: '03', label: 'Context retrieved', detail: 'Plan, persona, prior steps loaded' },
+        { num: '04', label: 'Guidance surfaced', detail: 'In-app step-by-step prompt shown' },
+        { num: '05', label: 'Milestone logged', detail: '"First value" event tracked' },
+      ],
+      capabilities: [
+        'Idle and confusion detection', 'In-app guidance deployment',
+        'Personalised onboarding paths', 'Milestone and activation tracking',
+        'Segment, Amplitude, Mixpanel', 'Drop-off prevention scoring',
+      ]
+    },
+    churn: {
+      lucide: 'shield-check', title: 'Churn prevention', agent: 'retention_agent',
+      tagline: 'Re-engage customers before they\'re gone.',
+      description: 'intentai monitors engagement signals continuously across your product. When disengagement patterns emerge — declining logins, falling feature usage, negative sentiment, competitor mentions — the retention agent activates with a targeted win-back strategy personalised to each account\'s history and value.',
+      workflow: [
+        { num: '01', label: 'Signal captured', detail: 'Usage dropped 60% week-over-week' },
+        { num: '02', label: 'Risk scored', detail: 'churn_risk: high (0.94)' },
+        { num: '03', label: 'Account profiled', detail: 'Value, tenure, tickets analysed' },
+        { num: '04', label: 'Strategy crafted', detail: 'Personalised win-back offer built' },
+        { num: '05', label: 'Outcome logged', detail: 'Retained/churned + LTV impact' },
+      ],
+      capabilities: [
+        'Usage decline and idle monitoring', 'Sentiment and NPS signal analysis',
+        'Churn risk scoring and segmentation', 'Personalised win-back campaigns',
+        'Offer and discount management', 'LTV impact and cohort reporting',
+      ]
+    },
+    leads: {
+      lucide: 'filter', title: 'Lead qualification', agent: 'qualifier_agent',
+      tagline: 'Score and route leads the moment intent peaks.',
+      description: 'Not every lead is ready to buy — and treating them the same wastes both time and budget. intentai\'s qualification agent scores inbound signals against your ICP criteria in real time, routing high-fit prospects to sales instantly while enrolling lower-fit leads into automated nurture sequences.',
+      workflow: [
+        { num: '01', label: 'Signal captured', detail: '"Interested in enterprise" form' },
+        { num: '02', label: 'Lead enriched', detail: 'Company, headcount, tech stack' },
+        { num: '03', label: 'ICP scored', detail: 'Fit score: 87/100 — high intent' },
+        { num: '04', label: 'Routing decided', detail: 'High fit → SDR notified in Slack' },
+        { num: '05', label: 'Pipeline updated', detail: 'Opportunity logged in Salesforce' },
+      ],
+      capabilities: [
+        'ICP scoring and fit analysis', 'Data enrichment via Clearbit, Apollo',
+        'Smart SDR routing or nurture enrol', 'Slack and CRM instant notifications',
+        'Conversion rate and pipeline reporting', 'Multi-touch attribution',
+      ]
+    },
+    internal: {
+      lucide: 'workflow', title: 'Internal workflows', agent: 'ops_agent',
+      tagline: 'Route every internal request to the right team, instantly.',
+      description: 'IT tickets, HR queries, finance approvals, ops requests — internal intent is just as valuable to detect as customer intent. intentai routes employee requests to the right agent or team automatically, eliminating manual triage, cutting resolution time, and maintaining a full audit trail.',
+      workflow: [
+        { num: '01', label: 'Signal captured', detail: '"VPN won\'t connect" in Slack' },
+        { num: '02', label: 'Intent classified', detail: 'internal: IT_support (0.97)' },
+        { num: '03', label: 'Ticket auto-created', detail: 'Jira ticket generated with context' },
+        { num: '04', label: 'Assignee notified', detail: 'On-call IT engineer pinged' },
+        { num: '05', label: 'SLA tracked', detail: 'Deadline set, escalation on breach' },
+      ],
+      capabilities: [
+        'Multi-channel request capture (Slack, email)', 'Auto-categorisation: IT, HR, Finance, Ops',
+        'Jira, ServiceNow, Linear integration', 'SLA tracking and auto-escalation',
+        'Employee satisfaction scoring', 'Compliance audit trail',
+      ]
+    },
+  };
+
+  function openModal(id) {
+    const d = MODALS[id];
+    if (!d) return;
+    const wfHTML = d.workflow.map(w => `
+      <div class="wf-step">
+        <div class="wf-num">${w.num}</div>
+        <div class="wf-label">${w.label}</div>
+        <div class="wf-detail">${w.detail}</div>
+      </div>`).join('');
+    const capsHTML = d.capabilities.map(c => `<div class="modal-cap">${c}</div>`).join('');
+    document.getElementById('modal-content').innerHTML = `
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-icon-box"><i data-lucide="${d.lucide}"></i></div>
+          <div class="modal-header-text">
+            <h2>${d.title}</h2>
+            <span class="modal-agent-tag">${d.agent}</span>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-tagline">${d.tagline}</p>
+        <p class="modal-desc">${d.description}</p>
+        <div class="modal-section-label">Workflow</div>
+        <div class="modal-workflow">${wfHTML}</div>
+        <div class="modal-section-label">Capabilities</div>
+        <div class="modal-caps">${capsHTML}</div>
+        <div class="modal-cta">
+          <p>Ready to deploy ${d.agent} for your team?</p>
+          <a href="mailto:rojomba17@gmail.com?subject=Demo – ${d.title} – intentai.io">Request a demo →</a>
+        </div>
+      </div>`;
+    lucide.createIcons();
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   async function handleWaitlist(e) {
     e.preventDefault();
