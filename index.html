@@ -69,8 +69,10 @@
       text-decoration: none;
     }
     .nav-logo svg { display: block; flex-shrink: 0; }
-    .nav-wordmark { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); white-space: nowrap; margin-left: -28px; }
-    .nav-wordmark span { color: var(--purple); }
+    .nav-wordmark { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; margin-left: -28px; }
+    .nav-brand { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; color: #f0f0f5; white-space: nowrap; line-height: 1; }
+    .nav-brand span { color: #a080ff; }
+    .nav-tagline { font-size: 0.58rem; font-weight: 400; letter-spacing: 0.22em; color: #5e5882; white-space: nowrap; margin-top: 5px; text-transform: uppercase; }
     .nav-logo span { color: var(--purple); }
 
     .nav-links {
@@ -1285,7 +1287,7 @@
 <circle cx="373.6" cy="209.8" r="5"   fill="rgba(255,255,255,0.85)"/>
 <circle cx="373.6" cy="209.8" r="2.5" fill="#ffffff"/>
 
-</svg><span class="nav-wordmark">Intent<span>AI</span></span></a>
+</svg><div class="nav-wordmark"><div class="nav-brand">intent<span>AI</span></div><div class="nav-tagline">DETECT · ROUTE · ACTIVATE</div></div></a>
   <ul class="nav-links">
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#use-cases">Capabilities</a></li>
