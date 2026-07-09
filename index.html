@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>intentai.io – Detect Intent. Deploy the Right Agent.</title>
-  <meta name="description" content="intentai reads customer signals in real time, identifies what they need, and instantly routes them to the AI agent built to act." />
+  <title>IntentAI – Detect Intent. Deploy the Right Agent.</title>
+  <meta name="description" content="IntentAI reads customer signals in real time, identifies what they need, and instantly routes them to the AI agent built to act." />
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.363.0/dist/umd/lucide.min.js"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -68,7 +68,9 @@
       color: var(--text);
       text-decoration: none;
     }
-    .nav-logo img { display: block; flex-shrink: 0; }
+    .nav-logo svg { display: block; flex-shrink: 0; }
+    .nav-wordmark { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); white-space: nowrap; }
+    .nav-wordmark span { color: var(--purple); }
     .nav-logo span { color: var(--purple); }
 
     .nav-links {
@@ -1153,7 +1155,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="38" height="38">
+  <a href="#" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="52" height="52" style="display:block;flex-shrink:0">
 
 <defs>
 
@@ -1283,7 +1285,7 @@
 <circle cx="373.6" cy="209.8" r="5"   fill="rgba(255,255,255,0.85)"/>
 <circle cx="373.6" cy="209.8" r="2.5" fill="#ffffff"/>
 
-</svg>intent<span>ai</span>.io</a>
+</svg><span class="nav-wordmark">Intent<span>AI</span></span></a>
   <ul class="nav-links">
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#use-cases">Capabilities</a></li>
@@ -1308,7 +1310,7 @@
   </h1>
 
   <p class="hero-sub">
-    intentai reads customer signals in real time, identifies what they need, and instantly routes them to the AI agent built to act — no manual triage, no delays.
+    IntentAI reads customer signals in real time, identifies what they need, and instantly routes them to the AI agent built to act — no manual triage, no delays.
   </p>
 
   <div class="hero-ctas">
@@ -1320,7 +1322,7 @@
   <div class="hero-demo">
     <div class="demo-titlebar">
       <div class="demo-dots"><span></span><span></span><span></span></div>
-      <span class="demo-title-text">intentai · live intent feed</span>
+      <span class="demo-title-text">IntentAI · live intent feed</span>
       <span class="demo-live"><span class="demo-live-dot"></span> live</span>
     </div>
     <div class="demo-body">
@@ -1407,7 +1409,7 @@
 <div class="section-wrap" id="use-cases">
   <div class="section-label">Use Cases &amp; Capabilities</div>
   <h2 class="section-title">Every intent, covered</h2>
-  <p class="section-sub">Across the full customer journey, intentai deploys the agent that fits the moment.</p>
+  <p class="section-sub">Across the full customer journey, IntentAI deploys the agent that fits the moment.</p>
 
   <div class="use-cases-grid">
     <div class="use-case" onclick="openModal('support')">
@@ -1489,7 +1491,7 @@
     </div>
     <div id="demo-form-wrap">
       <form class="demo-form" id="demo-form" onsubmit="handleDemoSubmit(event)">
-        <input type="hidden" name="_subject" value="Demo Request – intentai.io" />
+        <input type="hidden" name="_subject" value="Demo Request – IntentAI.io" />
         <input type="hidden" name="type" value="demo_request" />
         <div class="demo-row">
           <div class="demo-field">
@@ -1674,7 +1676,7 @@
   x="270" y="90"
   font-family="'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif"
   font-size="50" font-weight="800" letter-spacing="-1.5"
-  fill="#f0f0f5">intent<tspan fill="#a080ff">ai</tspan></text>
+  fill="#f0f0f5">Intent<tspan fill="#a080ff">AI</tspan></text>
 
 <text
   x="272" y="117"
@@ -1683,7 +1685,7 @@
   fill="#5e5882">DETECT · ROUTE · ACTIVATE</text>
 
 </svg></a>
-  <span>© 2026 intentai.io · All rights reserved</span>
+  <span>© 2026 IntentAI · All rights reserved</span>
   <a href="mailto:rojomba17@gmail.com">Contact</a>
 </footer>
 
@@ -1694,7 +1696,7 @@
     support: {
       lucide: 'headphones', title: 'Support resolution', agent: 'support_agent',
       tagline: 'Resolve instantly. Escalate only when it matters.',
-      description: 'intentai\'s support agent detects help-seeking intent across every channel — chat, email, in-app — the moment it emerges. It classifies the issue type, searches your knowledge base in milliseconds, crafts a personalised resolution, and closes the loop automatically. Human agents are only looped in when confidence falls below your threshold.',
+      description: 'IntentAI\'s support agent detects help-seeking intent across every channel — chat, email, in-app — the moment it emerges. It classifies the issue type, searches your knowledge base in milliseconds, crafts a personalised resolution, and closes the loop automatically. Human agents are only looped in when confidence falls below your threshold.',
       workflow: [
         { num: '01', label: 'Signal captured', detail: '"Can\'t log in" detected via chat' },
         { num: '02', label: 'Intent classified', detail: 'help_request: account_access (0.96)' },
@@ -1711,7 +1713,7 @@
     purchase: {
       lucide: 'trending-up', title: 'Purchase intent', agent: 'sales_agent',
       tagline: 'Catch buying signals before they go cold.',
-      description: 'When a customer shows purchase intent — browsing pricing pages, comparing plans, asking product questions — intentai\'s sales agent activates instantly. It enriches the lead, scores ICP fit, crafts a personalised pitch, and updates your CRM, all before a human SDR even gets the notification.',
+      description: 'When a customer shows purchase intent — browsing pricing pages, comparing plans, asking product questions — IntentAI\'s sales agent activates instantly. It enriches the lead, scores ICP fit, crafts a personalised pitch, and updates your CRM, all before a human SDR even gets the notification.',
       workflow: [
         { num: '01', label: 'Signal captured', detail: 'Pricing page visited 3× in 5 min' },
         { num: '02', label: 'Intent scored', detail: 'purchase_intent: high (0.91)' },
@@ -1728,7 +1730,7 @@
     onboarding: {
       lucide: 'user-plus', title: 'Onboarding', agent: 'onboard_agent',
       tagline: 'Guide every new user to their first "aha" moment.',
-      description: 'Drop-off during onboarding is one of the biggest growth levers in SaaS. intentai detects when new users are confused, stuck, or idle — and deploys a guided onboarding agent before they abandon. It adapts the journey to each user\'s persona, plan, and prior steps taken.',
+      description: 'Drop-off during onboarding is one of the biggest growth levers in SaaS. IntentAI detects when new users are confused, stuck, or idle — and deploys a guided onboarding agent before they abandon. It adapts the journey to each user\'s persona, plan, and prior steps taken.',
       workflow: [
         { num: '01', label: 'Signal captured', detail: 'User idle 4 min on setup screen' },
         { num: '02', label: 'Friction detected', detail: 'onboarding_stuck (0.88)' },
@@ -1745,7 +1747,7 @@
     churn: {
       lucide: 'shield-check', title: 'Churn prevention', agent: 'retention_agent',
       tagline: 'Re-engage customers before they\'re gone.',
-      description: 'intentai monitors engagement signals continuously across your product. When disengagement patterns emerge — declining logins, falling feature usage, negative sentiment, competitor mentions — the retention agent activates with a targeted win-back strategy personalised to each account\'s history and value.',
+      description: 'IntentAI monitors engagement signals continuously across your product. When disengagement patterns emerge — declining logins, falling feature usage, negative sentiment, competitor mentions — the retention agent activates with a targeted win-back strategy personalised to each account\'s history and value.',
       workflow: [
         { num: '01', label: 'Signal captured', detail: 'Usage dropped 60% week-over-week' },
         { num: '02', label: 'Risk scored', detail: 'churn_risk: high (0.94)' },
@@ -1762,7 +1764,7 @@
     leads: {
       lucide: 'filter', title: 'Lead qualification', agent: 'qualifier_agent',
       tagline: 'Score and route leads the moment intent peaks.',
-      description: 'Not every lead is ready to buy — and treating them the same wastes both time and budget. intentai\'s qualification agent scores inbound signals against your ICP criteria in real time, routing high-fit prospects to sales instantly while enrolling lower-fit leads into automated nurture sequences.',
+      description: 'Not every lead is ready to buy — and treating them the same wastes both time and budget. IntentAI\'s qualification agent scores inbound signals against your ICP criteria in real time, routing high-fit prospects to sales instantly while enrolling lower-fit leads into automated nurture sequences.',
       workflow: [
         { num: '01', label: 'Signal captured', detail: '"Interested in enterprise" form' },
         { num: '02', label: 'Lead enriched', detail: 'Company, headcount, tech stack' },
@@ -1779,7 +1781,7 @@
     internal: {
       lucide: 'workflow', title: 'Internal workflows', agent: 'ops_agent',
       tagline: 'Route every internal request to the right team, instantly.',
-      description: 'IT tickets, HR queries, finance approvals, ops requests — internal intent is just as valuable to detect as customer intent. intentai routes employee requests to the right agent or team automatically, eliminating manual triage, cutting resolution time, and maintaining a full audit trail.',
+      description: 'IT tickets, HR queries, finance approvals, ops requests — internal intent is just as valuable to detect as customer intent. IntentAI routes employee requests to the right agent or team automatically, eliminating manual triage, cutting resolution time, and maintaining a full audit trail.',
       workflow: [
         { num: '01', label: 'Signal captured', detail: '"VPN won\'t connect" in Slack' },
         { num: '02', label: 'Intent classified', detail: 'internal: IT_support (0.97)' },
@@ -1851,7 +1853,7 @@
         { value: '50+', label: 'Signal sources' },
         { value: '97%', label: 'Intent accuracy' },
       ],
-      description: 'intentai listens across every customer touchpoint — live chat, email threads, browsing behaviour, voice transcripts, CRM notes — and surfaces underlying intent before the customer has to repeat themselves. No polling. No batching. Intent the moment it emerges.',
+      description: 'IntentAI listens across every customer touchpoint — live chat, email threads, browsing behaviour, voice transcripts, CRM notes — and surfaces underlying intent before the customer has to repeat themselves. No polling. No batching. Intent the moment it emerges.',
       details: [
         { title: 'Omnichannel ingestion', body: 'Connect any channel via webhook, SDK, or 50+ native integrations. Chat, email, in-app events, voice — no signal goes unnoticed, regardless of where your customers are.' },
         { title: 'Real-time NLP classification', body: 'Transformer-based intent models run in under 150ms, even on ambiguous or multi-intent phrasing. Trained on your domain, not generic chat data.' },
@@ -1989,7 +1991,7 @@
       <div class="anim-window">
         <div class="anim-titlebar">
           <div class="anim-dots"><span></span><span></span><span></span></div>
-          <span class="anim-title-text">intentai &nbsp;·&nbsp; ${d.animLabel}</span>
+          <span class="anim-title-text">IntentAI &nbsp;·&nbsp; ${d.animLabel}</span>
           <span class="anim-live"><span class="anim-live-dot"></span> live</span>
         </div>
         <div class="anim-body">${animHTML}</div>
