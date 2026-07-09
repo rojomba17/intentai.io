@@ -59,12 +59,16 @@
     }
 
     .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
       font-size: 1.2rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--text);
       text-decoration: none;
     }
+    .nav-logo img { display: block; flex-shrink: 0; }
     .nav-logo span { color: var(--purple); }
 
     .nav-links {
@@ -1121,12 +1125,10 @@
     footer a:hover { color: var(--text); }
 
     .footer-logo {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
+      display: flex;
+      align-items: center;
+      line-height: 0;
     }
-    .footer-logo span { color: var(--purple); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -1151,7 +1153,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">intent<span>ai</span>.io</a>
+  <a href="#" class="nav-logo"><img src="intentai-mark-v2.svg" width="38" height="38" alt="">intent<span>ai</span>.io</a>
   <ul class="nav-links">
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#use-cases">Capabilities</a></li>
@@ -1385,7 +1387,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">intent<span>ai</span>.io</a>
+  <a href="#" class="footer-logo"><img src="intentai-lockup-v2.svg" height="64" alt="intentai"></a>
   <span>© 2026 intentai.io · All rights reserved</span>
   <a href="mailto:rojomba17@gmail.com">Contact</a>
 </footer>
