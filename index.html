@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IntentAI – Detect Intent. Deploy the Right Agent.</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="icon" type="image/svg+xml" href="intentai-mark-v2.svg">
+  <link rel="apple-touch-icon" href="favicon-192.png">
   <meta name="description" content="IntentAI reads customer signals in real time, identifies what they need, and instantly routes them to the AI agent built to act." />
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.363.0/dist/umd/lucide.min.js"></script>
   <style>
@@ -51,7 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.5rem 3rem;
+      padding: 0.5rem max(3rem, calc((100vw - 1100px) / 2));
       background: rgba(7,7,15,0.75);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -1151,6 +1155,374 @@
     @media (max-width: 480px) {
       .use-cases-grid { grid-template-columns: 1fr; }
     }
+
+
+    /* ── AGENT TABS ── */
+    .agent-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+    .agent-tab {
+      flex: 1;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.85rem 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      letter-spacing: 0.01em;
+    }
+    .agent-tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .agent-tab.active { color: var(--purple-light); border-bottom-color: var(--purple); background: rgba(124,110,245,0.06); }
+    .tab-icon { font-size: 0.9rem; }
+
+    .agent-pane { display: none; }
+    .agent-pane.active { display: block; }
+
+    .agent-input-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    /* ── PM COPILOT OUTPUT ── */
+    .pm-reframe {
+      font-size: 0.95rem;
+      color: var(--purple-light);
+      font-style: italic;
+      padding: 0.75rem 1rem;
+      border-left: 3px solid var(--purple);
+      background: rgba(124,110,245,0.06);
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+      opacity: 0; animation: fadeUp 0.3s ease 0.05s forwards;
+    }
+    .pm-section-head {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.1rem 0 0.5rem;
+      opacity: 0; animation: fadeUp 0.3s ease 0.1s forwards;
+    }
+    .pm-stories { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .pm-story {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.5;
+      padding: 0.6rem 0.8rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      opacity: 0; animation: fadeUp 0.3s ease 0.15s forwards;
+    }
+    .pm-story-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--purple);
+      background: rgba(124,110,245,0.15);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .pm-metrics { display: flex; flex-direction: column; gap: 0.4rem; }
+    .pm-metric {
+      font-size: 0.88rem;
+      color: #28c840;
+      padding: 0.5rem 0.8rem;
+      background: rgba(40,200,64,0.06);
+      border: 1px solid rgba(40,200,64,0.15);
+      border-radius: 8px;
+      opacity: 0; animation: fadeUp 0.3s ease 0.2s forwards;
+    }
+    .pm-roadmap { display: flex; flex-direction: column; gap: 0.5rem; }
+    .pm-road-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.65rem 0.8rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      opacity: 0; animation: fadeUp 0.3s ease 0.25s forwards;
+    }
+    .pm-priority {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .pm-priority.p0 { background: rgba(255,95,87,0.15); color: #ff5f57; }
+    .pm-priority.p1 { background: rgba(254,188,46,0.15); color: #febc2e; }
+    .pm-priority.p2 { background: rgba(40,200,64,0.12); color: #28c840; }
+    .pm-road-title { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .pm-road-why { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ── PRODUCT CRITIQUE OUTPUT ── */
+    .crit-score-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      opacity: 0; animation: fadeUp 0.3s ease 0.05s forwards;
+    }
+    .crit-score-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+    .crit-score-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .crit-score-fill { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
+    .crit-score-num { font-size: 0.9rem; font-weight: 800; white-space: nowrap; min-width: 55px; text-align: right; }
+    .crit-verdict {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.3s ease 0.1s forwards;
+    }
+    .crit-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .crit-col-head { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .crit-col-head.green { color: #28c840; }
+    .crit-col-head.red { color: #ff5f57; }
+    .crit-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .crit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--text);
+      opacity: 0; animation: fadeUp 0.3s ease 0.15s forwards;
+    }
+    .crit-item span { flex-shrink: 0; font-size: 0.75rem; margin-top: 0.1rem; }
+    .crit-item.strength span { color: #28c840; }
+    .crit-item.risk span { color: #ff5f57; }
+    .crit-recommendation {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 0.8rem 1rem;
+      background: rgba(124,110,245,0.05);
+      border: 1px solid rgba(124,110,245,0.12);
+      border-radius: 8px;
+      opacity: 0; animation: fadeUp 0.3s ease 0.2s forwards;
+    }
+
+    /* ── AGENT DEMO ── */
+    .agent-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .agent-terminal {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(124,110,245,0.08);
+    }
+    .agent-terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--border);
+    }
+    .agent-terminal-bar span {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #3a3a4a;
+      display: inline-block;
+    }
+    .agent-terminal-bar span:nth-child(1) { background: #ff5f57; }
+    .agent-terminal-bar span:nth-child(2) { background: #febc2e; }
+    .agent-terminal-bar span:nth-child(3) { background: #28c840; }
+    .agent-terminal-label {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .agent-input-area {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .agent-input-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: 0.75rem;
+    }
+    .agent-textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding: 0.9rem 1rem;
+      resize: vertical;
+      min-height: 90px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .agent-textarea:focus { border-color: var(--purple); }
+    .agent-textarea::placeholder { color: var(--faint); }
+    .agent-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .agent-example-chip {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .agent-example-chip:hover {
+      color: var(--text);
+      border-color: var(--purple);
+      background: rgba(124,110,245,0.08);
+    }
+    .agent-run-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .agent-run-btn:hover { background: #6b5ee0; transform: translateY(-1px); }
+    .agent-run-btn:disabled { background: var(--faint); cursor: not-allowed; transform: none; }
+    .agent-run-btn .spin {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    .agent-run-btn.loading .spin { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .agent-output {
+      padding: 1.5rem;
+      display: none;
+    }
+    .agent-output.visible { display: block; }
+    .agent-output-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #28c840;
+      margin-bottom: 1rem;
+    }
+    .agent-result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .agent-result-card {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: fadeUp 0.4s ease forwards;
+    }
+    .agent-result-card:nth-child(1) { animation-delay: 0.05s; }
+    .agent-result-card:nth-child(2) { animation-delay: 0.12s; }
+    .agent-result-card:nth-child(3) { animation-delay: 0.19s; }
+    .agent-result-card:nth-child(4) { animation-delay: 0.26s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .agent-result-key {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .agent-result-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .agent-result-value.purple { color: var(--purple-light); }
+    .agent-result-value.green { color: #28c840; }
+    .agent-reasoning {
+      background: rgba(124,110,245,0.06);
+      border: 1px solid rgba(124,110,245,0.15);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.4s ease 0.33s forwards;
+    }
+    .agent-error {
+      font-size: 0.88rem;
+      color: #ff5f57;
+      padding: 0.5rem 0;
+    }
+    .agent-powered {
+      font-size: 0.72rem;
+      color: var(--faint);
+      text-align: right;
+      margin-top: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.4s ease 0.4s forwards;
+    }
+    .agent-powered span { color: var(--purple); }
   </style>
 </head>
 <body>
@@ -1454,6 +1826,111 @@
 </div>
 
 <div class="divider"></div>
+
+
+<div class="divider"></div>
+
+<!-- LIVE AGENT DEMO -->
+<div class="agent-wrap" id="try-it">
+  <div class="section-label" style="text-align:center;margin-bottom:1rem;">Live Agents</div>
+  <h2 class="section-title" style="text-align:center;">Three AI agents, built with Claude</h2>
+  <p class="section-sub" style="text-align:center;margin-bottom:2.5rem;">Real outputs. Real AI. Try each agent below — the same kind of tooling I build for product teams.</p>
+
+  <div class="agent-terminal">
+    <div class="agent-terminal-bar">
+      <span></span><span></span><span></span>
+      <div class="agent-terminal-label" id="terminal-label">intentai · agent playground</div>
+    </div>
+
+    <div class="agent-tabs">
+      <button class="agent-tab active" data-tab="intent" onclick="switchTab('intent', this)">
+        <span class="tab-icon">⚡</span> Intent Classifier
+      </button>
+      <button class="agent-tab" data-tab="pm" onclick="switchTab('pm', this)">
+        <span class="tab-icon">📋</span> PM Copilot
+      </button>
+      <button class="agent-tab" data-tab="critique" onclick="switchTab('critique', this)">
+        <span class="tab-icon">🔍</span> Product Critique
+      </button>
+    </div>
+
+    <!-- PANE: Intent Classifier -->
+    <div class="agent-pane active" id="pane-intent">
+      <div class="agent-input-area">
+        <div class="agent-input-label">Customer Message</div>
+        <div class="agent-input-desc">Paste any inbound customer message and watch the engine classify intent and route it to the right agent.</div>
+        <textarea class="agent-textarea" id="input-intent" placeholder="e.g. My card was charged twice this morning and I need it refunded immediately..."></textarea>
+        <div class="agent-examples">
+          <div class="agent-example-chip" onclick="setExample('intent', this)">My card was charged twice</div>
+          <div class="agent-example-chip" onclick="setExample('intent', this)">I want to upgrade to premium</div>
+          <div class="agent-example-chip" onclick="setExample('intent', this)">How do I export my data?</div>
+          <div class="agent-example-chip" onclick="setExample('intent', this)">My order never arrived</div>
+          <div class="agent-example-chip" onclick="setExample('intent', this)">I need to cancel my account</div>
+        </div>
+        <button class="agent-run-btn" id="btn-intent" onclick="runAgent('intent')">
+          <div class="spin"></div>
+          <span class="btn-label">Detect Intent →</span>
+        </button>
+      </div>
+      <div class="agent-output" id="output-intent">
+        <div class="agent-output-label">▸ Analysis complete</div>
+        <div class="agent-result-grid" id="grid-intent"></div>
+        <div class="agent-reasoning" id="reasoning-intent"></div>
+        <div class="agent-powered">Powered by <span>Claude Haiku</span> via IntentAI engine</div>
+      </div>
+    </div>
+
+    <!-- PANE: PM Copilot -->
+    <div class="agent-pane" id="pane-pm">
+      <div class="agent-input-area">
+        <div class="agent-input-label">Product Problem</div>
+        <div class="agent-input-desc">Describe a product challenge or opportunity. The copilot returns user stories, success metrics, and a prioritized roadmap.</div>
+        <textarea class="agent-textarea" id="input-pm" placeholder="e.g. Our mobile app checkout has a 65% drop-off rate. Users abandon at the payment step..."></textarea>
+        <div class="agent-examples">
+          <div class="agent-example-chip" onclick="setExample('pm', this)">65% checkout drop-off at payment step</div>
+          <div class="agent-example-chip" onclick="setExample('pm', this)">Users aren't adopting our mobile app</div>
+          <div class="agent-example-chip" onclick="setExample('pm', this)">Onboarding takes 3 days, competitors do it in 1</div>
+          <div class="agent-example-chip" onclick="setExample('pm', this)">We're losing enterprise deals due to missing SSO</div>
+        </div>
+        <button class="agent-run-btn" id="btn-pm" onclick="runAgent('pm')">
+          <div class="spin"></div>
+          <span class="btn-label">Generate PM Brief →</span>
+        </button>
+      </div>
+      <div class="agent-output" id="output-pm">
+        <div class="agent-output-label">▸ PM brief generated</div>
+        <div id="grid-pm"></div>
+        <div class="agent-powered">Powered by <span>Claude Haiku</span> via IntentAI engine</div>
+      </div>
+    </div>
+
+    <!-- PANE: Product Critique -->
+    <div class="agent-pane" id="pane-critique">
+      <div class="agent-input-area">
+        <div class="agent-input-label">Product Idea</div>
+        <div class="agent-input-desc">Describe a product idea or feature concept. Get structured PM feedback: strengths, risks, market fit, and a verdict.</div>
+        <textarea class="agent-textarea" id="input-critique" placeholder="e.g. An AI assistant that summarizes your unread Slack messages each morning and highlights action items..."></textarea>
+        <div class="agent-examples">
+          <div class="agent-example-chip" onclick="setExample('critique', this)">AI that summarizes your Slack daily</div>
+          <div class="agent-example-chip" onclick="setExample('critique', this)">Social app for dog owners to arrange playdates</div>
+          <div class="agent-example-chip" onclick="setExample('critique', this)">Subscription box for indie board games</div>
+          <div class="agent-example-chip" onclick="setExample('critique', this)">B2B tool to auto-generate sales proposals from CRM data</div>
+        </div>
+        <button class="agent-run-btn" id="btn-critique" onclick="runAgent('critique')">
+          <div class="spin"></div>
+          <span class="btn-label">Critique This →</span>
+        </button>
+      </div>
+      <div class="agent-output" id="output-critique">
+        <div class="agent-output-label">▸ Critique complete</div>
+        <div id="grid-critique"></div>
+        <div class="agent-powered">Powered by <span>Claude Haiku</span> via IntentAI engine</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <!-- WAITLIST -->
 <div class="cta-wrap" id="waitlist">
@@ -2087,6 +2564,156 @@
       }, 3000);
     }
   }
+
+
+  // ── AGENT DEMO ──
+  const WORKER_URL = 'https://intentai-proxy.rojomba17.workers.dev';
+
+  const TAB_LABELS = {
+    intent: 'intentai · intent classifier v1.0',
+    pm: 'intentai · pm copilot v1.0',
+    critique: 'intentai · product critique v1.0'
+  };
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.agent-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.agent-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('pane-' + tab).classList.add('active');
+    document.getElementById('terminal-label').textContent = TAB_LABELS[tab];
+  }
+
+  function setExample(tab, el) {
+    document.getElementById('input-' + tab).value = el.textContent;
+  }
+
+  function showError(tab, msg) {
+    const grid = document.getElementById('grid-' + tab);
+    grid.innerHTML = '<div class="agent-error">Error: ' + msg + '</div>';
+    document.getElementById('output-' + tab).classList.add('visible');
+  }
+
+  async function runAgent(tab) {
+    const input = document.getElementById('input-' + tab).value.trim();
+    if (!input) return;
+
+    const btn = document.getElementById('btn-' + tab);
+    const output = document.getElementById('output-' + tab);
+    const btnLabel = btn.querySelector('.btn-label');
+
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btnLabel.textContent = 'Analyzing...';
+    output.classList.remove('visible');
+
+    const SYSTEMS = {
+      intent: 'You are IntentAI, an intelligent intent classification and agent routing engine. Analyze the customer message and return ONLY a valid JSON object with these exact fields: intent (string, e.g. "Billing Dispute"), confidence (number 0-100), agent (string, e.g. "Billing Resolution Agent"), action (string, 1 sentence describing what the agent does), reasoning (string, 1-2 sentences). No markdown, no extra text, only JSON.',
+
+      pm: 'You are a senior product manager and strategic advisor. Given a product problem or challenge, return ONLY a valid JSON object with these exact fields: problem_reframe (string, 1 sentence reframing the core problem), user_stories (array of exactly 3 strings in "As a [user], I want [goal] so that [outcome]" format), success_metrics (array of exactly 3 specific measurable KPI strings), roadmap (array of exactly 3 objects each with: priority string like "P0"/"P1"/"P2", item string, rationale string). No markdown, no extra text, only JSON.',
+
+      critique: 'You are a sharp product critic and experienced VC advisor. Given a product idea, return ONLY a valid JSON object with these exact fields: strengths (array of exactly 3 strings), risks (array of exactly 3 strings), market_fit_score (number 0-100), verdict (string, 1 punchy sentence), recommendation (string, 2-3 actionable sentences on what to do next). No markdown, no extra text, only JSON.'
+    };
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system: SYSTEMS[tab],
+          messages: [{ role: 'user', content: input }]
+        })
+      });
+
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message || 'API error');
+
+      const raw = data.content[0].text.trim();
+      // Strip markdown code fences if present
+      const clean = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+      const result = JSON.parse(clean);
+      const grid = document.getElementById('grid-' + tab);
+
+      if (tab === 'intent') {
+        grid.className = 'agent-result-grid';
+        grid.innerHTML =
+          '<div class="agent-result-card">' +
+            '<div class="agent-result-key">Intent Detected</div>' +
+            '<div class="agent-result-value purple">' + result.intent + '</div>' +
+          '</div>' +
+          '<div class="agent-result-card">' +
+            '<div class="agent-result-key">Confidence</div>' +
+            '<div class="agent-result-value green">' + result.confidence + '%</div>' +
+          '</div>' +
+          '<div class="agent-result-card">' +
+            '<div class="agent-result-key">Agent Assigned</div>' +
+            '<div class="agent-result-value">' + result.agent + '</div>' +
+          '</div>' +
+          '<div class="agent-result-card">' +
+            '<div class="agent-result-key">Action Taken</div>' +
+            '<div class="agent-result-value" style="font-size:0.88rem;font-weight:600">' + result.action + '</div>' +
+          '</div>';
+        const r = document.getElementById('reasoning-intent');
+        r.textContent = result.reasoning;
+        r.style.display = 'block';
+
+      } else if (tab === 'pm') {
+        grid.className = '';
+        const stories = result.user_stories.map(function(s, i) {
+          return '<li class="pm-story"><span class="pm-story-num">US' + (i+1) + '</span>' + s + '</li>';
+        }).join('');
+        const metrics = result.success_metrics.map(function(m) {
+          return '<div class="pm-metric">' + m + '</div>';
+        }).join('');
+        const roadmap = result.roadmap.map(function(r) {
+          return '<div class="pm-road-item">' +
+            '<span class="pm-priority ' + r.priority.toLowerCase() + '">' + r.priority + '</span>' +
+            '<div><div class="pm-road-title">' + r.item + '</div><div class="pm-road-why">' + r.rationale + '</div></div>' +
+          '</div>';
+        }).join('');
+        grid.innerHTML =
+          '<div class="pm-reframe">' + result.problem_reframe + '</div>' +
+          '<div class="pm-section-head">User Stories</div><ul class="pm-stories">' + stories + '</ul>' +
+          '<div class="pm-section-head">Success Metrics</div><div class="pm-metrics">' + metrics + '</div>' +
+          '<div class="pm-section-head">Roadmap</div><div class="pm-roadmap">' + roadmap + '</div>';
+
+      } else if (tab === 'critique') {
+        grid.className = '';
+        const strengths = result.strengths.map(function(s) {
+          return '<li class="crit-item strength"><span>✓</span>' + s + '</li>';
+        }).join('');
+        const risks = result.risks.map(function(r) {
+          return '<li class="crit-item risk"><span>✕</span>' + r + '</li>';
+        }).join('');
+        const score = result.market_fit_score;
+        const scoreColor = score >= 70 ? '#28c840' : score >= 45 ? '#febc2e' : '#ff5f57';
+        grid.innerHTML =
+          '<div class="crit-score-row">' +
+            '<div class="crit-score-label">Market Fit Score</div>' +
+            '<div class="crit-score-bar"><div class="crit-score-fill" style="width:' + score + '%;background:' + scoreColor + '"></div></div>' +
+            '<div class="crit-score-num" style="color:' + scoreColor + '">' + score + '/100</div>' +
+          '</div>' +
+          '<div class="crit-verdict">' + result.verdict + '</div>' +
+          '<div class="crit-cols">' +
+            '<div><div class="crit-col-head green">Strengths</div><ul class="crit-list">' + strengths + '</ul></div>' +
+            '<div><div class="crit-col-head red">Risks</div><ul class="crit-list">' + risks + '</ul></div>' +
+          '</div>' +
+          '<div class="crit-recommendation">' + result.recommendation + '</div>';
+      }
+
+      output.classList.add('visible');
+
+    } catch (err) {
+      showError(tab, err.message);
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove('loading');
+      const LABELS = { intent: 'Detect Intent →', pm: 'Generate PM Brief →', critique: 'Critique This →' };
+      btn.querySelector('.btn-label').textContent = LABELS[tab];
+    }
+  }
+
+
+
 </script>
 
 </body>
