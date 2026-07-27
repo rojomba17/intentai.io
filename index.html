@@ -1317,6 +1317,26 @@
     }
 
     /* ── MULTI-AGENT SECTION ── */
+
+    .ma-term-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.85rem;
+      border-radius: 99px;
+      border: 1px solid;
+      letter-spacing: 0.01em;
+    }
+    .ma-term-pill.solid {
+      background: rgba(124,110,245,0.12);
+      color: #a99ef8;
+      border-color: rgba(124,110,245,0.3);
+    }
+    .ma-term-pill.outline {
+      background: transparent;
+      color: #5e5882;
+      border-color: rgba(255,255,255,0.1);
+    }
+
     .multiagent-wrap {
       max-width: 1000px;
       margin: 0 auto;
@@ -1730,26 +1750,6 @@
       .multiagent-capabilities { grid-template-columns: 1fr 1fr; }
     }
 
-
-    .agent-gh-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.45rem 1rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      color: var(--muted);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .agent-gh-badge:hover {
-      border-color: rgba(124,110,245,0.4);
-      color: var(--text);
-      background: rgba(124,110,245,0.06);
-    }
 
     /* ── AGENT TABS ── */
     .agent-tabs {
@@ -2517,9 +2517,15 @@
 
 <!-- MULTI-AGENT -->
 <div class="multiagent-wrap" id="multi-agent">
-  <div class="section-label" style="text-align:center;margin-bottom:1rem;">Agent Networks</div>
+  <div class="section-label" style="text-align:center;margin-bottom:1rem;">Multi-Agent Orchestration</div>
   <h2 class="section-title" style="text-align:center;">Agents that talk to agents</h2>
-  <p class="section-sub" style="text-align:center;margin-bottom:0;white-space:nowrap;max-width:none;">One intent can cascade across a coordinated network of specialists — no human in the loop.</p>
+  <p class="section-sub" style="text-align:center;max-width:620px;margin:0 auto 1.25rem;">Agentic workflows powered by agent-to-agent (A2A) communication across a dynamic agent mesh — no human in the loop.</p>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;margin-bottom:2.5rem;">
+    <span class="ma-term-pill solid">Multi-Agent Orchestration</span>
+    <span class="ma-term-pill solid">Agentic Workflows</span>
+    <span class="ma-term-pill outline">A2A Protocol</span>
+    <span class="ma-term-pill outline">Agent Mesh</span>
+  </div>
 
   <div class="multiagent-canvas">
 
@@ -2722,13 +2728,8 @@
 <div class="agent-wrap" id="try-it">
   <div class="section-label" style="text-align:center;margin-bottom:1rem;">Live Demo</div>
   <h2 class="section-title" style="text-align:center;">See IntentAI in action</h2>
-  <p class="section-sub" style="text-align:center;max-width:600px;margin:0 auto 1.5rem;">Live demos of the agents IntentAI detects intent for and routes to. Real outputs. Open source.</p>
-  <div style="display:flex;justify-content:center;margin-bottom:2.5rem;">
-    <a href="https://github.com" target="_blank" class="agent-gh-badge">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-      View source on GitHub
-    </a>
-  </div>
+  <p class="section-sub" style="text-align:center;max-width:600px;margin:0 auto 2.5rem;">Live demos of the agents IntentAI detects intent for and routes to. Real outputs, real AI.</p>
+
 
   <div class="agent-terminal">
     <div class="agent-terminal-bar">
@@ -2770,7 +2771,7 @@
         <div class="agent-output-label">▸ Analysis complete</div>
         <div class="agent-result-grid" id="grid-intent"></div>
         <div class="agent-reasoning" id="reasoning-intent"></div>
-        <div class="agent-powered">IntentAI routing engine · <span>Claude Haiku</span> · <a href="https://github.com" target="_blank" style="color:var(--purple);text-decoration:none;">open source ↗</a></div>
+        <div class="agent-powered">IntentAI routing engine · Powered by <span>Claude Haiku</span></div>
       </div>
     </div>
 
@@ -2794,7 +2795,7 @@
       <div class="agent-output" id="output-pm">
         <div class="agent-output-label">▸ PM brief generated</div>
         <div id="grid-pm"></div>
-        <div class="agent-powered">IntentAI routing engine · <span>Claude Haiku</span> · <a href="https://github.com" target="_blank" style="color:var(--purple);text-decoration:none;">open source ↗</a></div>
+        <div class="agent-powered">IntentAI routing engine · Powered by <span>Claude Haiku</span></div>
       </div>
     </div>
 
@@ -2818,7 +2819,7 @@
       <div class="agent-output" id="output-critique">
         <div class="agent-output-label">▸ Critique complete</div>
         <div id="grid-critique"></div>
-        <div class="agent-powered">IntentAI routing engine · <span>Claude Haiku</span> · <a href="https://github.com" target="_blank" style="color:var(--purple);text-decoration:none;">open source ↗</a></div>
+        <div class="agent-powered">IntentAI routing engine · Powered by <span>Claude Haiku</span></div>
       </div>
     </div>
 
