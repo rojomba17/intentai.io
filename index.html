@@ -1395,6 +1395,160 @@
       padding: 1.1rem;
     }
     .ma-cap-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+
+    .ma-cap-icon-box {
+      width: 48px; height: 48px;
+      background: rgba(124,110,245,0.1);
+      border: 1px solid rgba(124,110,245,0.25);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── AGENT ARCHITECTURE DEEP DIVE ── */
+    .agentarch-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .agentarch-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 3rem 0;
+    }
+    .agentarch-layer {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+      position: relative;
+    }
+    .agentarch-layer:last-child { border-bottom: none; }
+    .agentarch-layer:hover { background: rgba(124,110,245,0.04); }
+    .agentarch-layer-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .agentarch-layer-icon svg { width: 20px; height: 20px; stroke: #a080ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agentarch-layer-name { font-size: 0.82rem; font-weight: 700; color: var(--text); min-width: 130px; }
+    .agentarch-layer-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; flex: 1; }
+    .agentarch-tech-pill {
+      font-size: 0.7rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 0.2rem 0.65rem;
+    }
+    .agentarch-layer-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+    }
+
+    /* Component explorer */
+    .arch-comp-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin: 2.5rem 0;
+    }
+    .arch-comp-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .arch-comp-card:hover, .arch-comp-card.active {
+      border-color: rgba(124,110,245,0.5);
+      background: rgba(124,110,245,0.06);
+    }
+    .arch-comp-card.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid rgba(124,110,245,0.5);
+    }
+    .arch-comp-icon {
+      width: 36px; height: 36px;
+      background: rgba(124,110,245,0.1);
+      border: 1px solid rgba(124,110,245,0.2);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.6rem;
+    }
+    .arch-comp-icon svg { width: 18px; height: 18px; stroke: #a080ff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .arch-comp-title { font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .arch-comp-sub { font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+
+    .arch-comp-detail {
+      display: none;
+      background: rgba(124,110,245,0.05);
+      border: 1px solid rgba(124,110,245,0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.25s ease;
+    }
+    .arch-comp-detail.open { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .arch-detail-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); margin-bottom: 0.5rem; }
+    .arch-detail-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .arch-detail-principle {
+      font-size: 0.82rem;
+      color: var(--text);
+      font-style: italic;
+      padding: 0.6rem 0.9rem;
+      border-left: 3px solid var(--purple);
+      background: rgba(124,110,245,0.06);
+      border-radius: 0 8px 8px 0;
+    }
+    .arch-tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .arch-tech-tag-pill {
+      font-size: 0.72rem;
+      color: var(--purple-light);
+      background: rgba(124,110,245,0.1);
+      border: 1px solid rgba(124,110,245,0.2);
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-weight: 600;
+    }
+    .arch-code-block {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: #c0b8ff;
+      line-height: 1.6;
+      margin-top: 0.75rem;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .arch-code-block .code-comment { color: #555; }
+    .arch-code-block .code-key { color: #a080ff; }
+    .arch-code-block .code-val { color: #7fffb0; }
+
+    @media (max-width: 750px) {
+      .arch-comp-grid { grid-template-columns: repeat(3, 1fr); }
+      .arch-comp-detail.open { grid-template-columns: 1fr; gap: 1rem; }
+      .agentarch-layer { flex-wrap: wrap; gap: 0.5rem; }
+    }
+
     .ma-cap-title { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
     .ma-cap-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
 
@@ -1995,6 +2149,258 @@
 
 <div class="divider"></div>
 
+<!-- AGENT ARCHITECTURE -->
+<div class="agentarch-wrap" id="agent-architecture">
+  <div class="section-label" style="text-align:center;margin-bottom:1rem;">Deep Dive</div>
+  <h2 class="section-title" style="text-align:center;">Agent Architecture</h2>
+  <p class="section-sub" style="text-align:center;max-width:600px;margin:0 auto;">The system design, components, and engineering decisions behind production-grade AI agents.</p>
+
+  <!-- STACK DIAGRAM -->
+  <div class="agentarch-stack">
+    <div class="agentarch-layer">
+      <div class="agentarch-layer-bar" style="background:#a080ff;"></div>
+      <div class="agentarch-layer-icon" style="background:rgba(160,128,255,0.12)">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="agentarch-layer-name">Output Layer</div>
+      <div class="agentarch-layer-tech">
+        <span class="agentarch-tech-pill">REST APIs</span>
+        <span class="agentarch-tech-pill">Webhooks</span>
+        <span class="agentarch-tech-pill">UI responses</span>
+        <span class="agentarch-tech-pill">Database writes</span>
+        <span class="agentarch-tech-pill">Email / SMS</span>
+      </div>
+    </div>
+    <div class="agentarch-layer">
+      <div class="agentarch-layer-bar" style="background:#7c6ef5;"></div>
+      <div class="agentarch-layer-icon" style="background:rgba(124,110,245,0.12)">
+        <svg viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      </div>
+      <div class="agentarch-layer-name">Action Layer</div>
+      <div class="agentarch-layer-tech">
+        <span class="agentarch-tech-pill">Tool calling</span>
+        <span class="agentarch-tech-pill">Function execution</span>
+        <span class="agentarch-tech-pill">Structured output</span>
+        <span class="agentarch-tech-pill">Error handling</span>
+        <span class="agentarch-tech-pill">Retry logic</span>
+      </div>
+    </div>
+    <div class="agentarch-layer">
+      <div class="agentarch-layer-bar" style="background:#5f4fd4;"></div>
+      <div class="agentarch-layer-icon" style="background:rgba(95,79,212,0.12)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <div class="agentarch-layer-name">Reasoning Core</div>
+      <div class="agentarch-layer-tech">
+        <span class="agentarch-tech-pill">LLM inference</span>
+        <span class="agentarch-tech-pill">Chain-of-Thought</span>
+        <span class="agentarch-tech-pill">ReAct loop</span>
+        <span class="agentarch-tech-pill">Prompt engineering</span>
+        <span class="agentarch-tech-pill">Self-critique</span>
+      </div>
+    </div>
+    <div class="agentarch-layer">
+      <div class="agentarch-layer-bar" style="background:#4a3ab5;"></div>
+      <div class="agentarch-layer-icon" style="background:rgba(74,58,181,0.12)">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 9v4c0 1.66 4.03 3 9 3s9-1.34 9-3V9"/></svg>
+      </div>
+      <div class="agentarch-layer-name">Memory Layer</div>
+      <div class="agentarch-layer-tech">
+        <span class="agentarch-tech-pill">Context window</span>
+        <span class="agentarch-tech-pill">Vector store</span>
+        <span class="agentarch-tech-pill">Episodic memory</span>
+        <span class="agentarch-tech-pill">Semantic retrieval</span>
+        <span class="agentarch-tech-pill">Session state</span>
+      </div>
+    </div>
+    <div class="agentarch-layer">
+      <div class="agentarch-layer-bar" style="background:#352b8a;"></div>
+      <div class="agentarch-layer-icon" style="background:rgba(53,43,138,0.15)">
+        <svg viewBox="0 0 24 24"><path d="M2 12h20M2 6h20M2 18h20"/></svg>
+      </div>
+      <div class="agentarch-layer-name">Perception Layer</div>
+      <div class="agentarch-layer-tech">
+        <span class="agentarch-tech-pill">Tokenization</span>
+        <span class="agentarch-tech-pill">Embeddings</span>
+        <span class="agentarch-tech-pill">Intent signals</span>
+        <span class="agentarch-tech-pill">Multi-modal input</span>
+        <span class="agentarch-tech-pill">Context extraction</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE COMPONENT EXPLORER -->
+  <div class="arch-detail-label" style="text-align:center;font-size:0.72rem;margin-bottom:1rem;">Click any component to explore</div>
+  <div class="arch-comp-grid">
+
+    <div class="arch-comp-card" onclick="toggleArchComp('perception')">
+      <div class="arch-comp-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="arch-comp-title">Perception</div>
+      <div class="arch-comp-sub">Input processing and signal extraction</div>
+    </div>
+
+    <div class="arch-comp-card" onclick="toggleArchComp('memory')">
+      <div class="arch-comp-icon">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 9v4c0 1.66 4.03 3 9 3s9-1.34 9-3V9"/></svg>
+      </div>
+      <div class="arch-comp-title">Memory</div>
+      <div class="arch-comp-sub">State, context, and retrieval</div>
+    </div>
+
+    <div class="arch-comp-card" onclick="toggleArchComp('reasoning')">
+      <div class="arch-comp-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg>
+      </div>
+      <div class="arch-comp-title">Reasoning</div>
+      <div class="arch-comp-sub">LLM core and thinking chain</div>
+    </div>
+
+    <div class="arch-comp-card" onclick="toggleArchComp('planning')">
+      <div class="arch-comp-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <div class="arch-comp-title">Planning</div>
+      <div class="arch-comp-sub">Task decomposition and sequencing</div>
+    </div>
+
+    <div class="arch-comp-card" onclick="toggleArchComp('action')">
+      <div class="arch-comp-icon">
+        <svg viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+      </div>
+      <div class="arch-comp-title">Action</div>
+      <div class="arch-comp-sub">Tool calls and real-world execution</div>
+    </div>
+
+  </div>
+
+  <!-- Detail panels -->
+  <div class="arch-comp-detail" id="arch-detail-perception">
+    <div>
+      <div class="arch-detail-label">Perception Layer</div>
+      <div class="arch-detail-desc">The perception layer transforms raw inputs — text, structured data, events — into a normalized representation the agent can reason over. This includes tokenization, embedding generation, entity extraction, and signal classification. Bad perception means bad reasoning. Most agent failures start here.</div>
+      <div class="arch-detail-principle">"Garbage in, garbage out. Pre-process everything before it hits the LLM."</div>
+    </div>
+    <div>
+      <div class="arch-detail-label">Key Technologies</div>
+      <div class="arch-tech-tags">
+        <span class="arch-tech-tag-pill">Embeddings</span>
+        <span class="arch-tech-tag-pill">Tokenization</span>
+        <span class="arch-tech-tag-pill">NER</span>
+        <span class="arch-tech-tag-pill">Chunking</span>
+        <span class="arch-tech-tag-pill">Preprocessing</span>
+      </div>
+      <div class="arch-code-block"><span class="code-comment"># Perception pipeline</span>
+<span class="code-key">input</span>    = normalize(raw_message)
+<span class="code-key">tokens</span>   = tokenizer.encode(input)
+<span class="code-key">embedding</span> = model.embed(tokens)
+<span class="code-key">signals</span>  = extract_entities(input)
+<span class="code-key">context</span>  = build_context(embedding, signals)</div>
+    </div>
+  </div>
+
+  <div class="arch-comp-detail" id="arch-detail-memory">
+    <div>
+      <div class="arch-detail-label">Memory System</div>
+      <div class="arch-detail-desc">Agents are stateless by default — memory is what makes them feel intelligent across turns. Short-term memory lives in the context window. Long-term memory lives in vector stores, retrieved semantically on demand. Episodic memory stores past interactions. The architecture decision is knowing what to keep, what to summarize, and what to discard.</div>
+      <div class="arch-detail-principle">"What an agent remembers determines what it can do. Design memory before prompts."</div>
+    </div>
+    <div>
+      <div class="arch-detail-label">Key Technologies</div>
+      <div class="arch-tech-tags">
+        <span class="arch-tech-tag-pill">Vector DB</span>
+        <span class="arch-tech-tag-pill">RAG</span>
+        <span class="arch-tech-tag-pill">Sliding Window</span>
+        <span class="arch-tech-tag-pill">Summarization</span>
+        <span class="arch-tech-tag-pill">pgvector</span>
+      </div>
+      <div class="arch-code-block"><span class="code-comment"># Memory retrieval</span>
+<span class="code-key">query_vec</span>  = embed(user_message)
+<span class="code-key">memories</span>   = vector_db.search(query_vec, k=5)
+<span class="code-key">summary</span>    = compress(conversation_history)
+<span class="code-key">context</span>    = [summary] + memories + [user_message]</div>
+    </div>
+  </div>
+
+  <div class="arch-comp-detail" id="arch-detail-reasoning">
+    <div>
+      <div class="arch-detail-label">Reasoning Core</div>
+      <div class="arch-detail-desc">The reasoning core is the LLM — but raw LLM calls aren't enough. Production agents use structured thinking patterns: Chain-of-Thought forces step-by-step reasoning, ReAct interleaves reasoning with tool use, and self-critique loops catch errors before they become outputs. The prompt IS the architecture here.</div>
+      <div class="arch-detail-principle">"Structure the LLM's thinking. Don't leave reasoning to chance."</div>
+    </div>
+    <div>
+      <div class="arch-detail-label">Key Technologies</div>
+      <div class="arch-tech-tags">
+        <span class="arch-tech-tag-pill">Chain-of-Thought</span>
+        <span class="arch-tech-tag-pill">ReAct</span>
+        <span class="arch-tech-tag-pill">Self-critique</span>
+        <span class="arch-tech-tag-pill">Few-shot</span>
+        <span class="arch-tech-tag-pill">Claude / GPT-4</span>
+      </div>
+      <div class="arch-code-block"><span class="code-comment"># ReAct reasoning loop</span>
+<span class="code-key">while</span> not done:
+  <span class="code-key">thought</span> = llm.think(context)
+  <span class="code-key">action</span>  = llm.decide_action(thought)
+  <span class="code-key">result</span>  = tools.execute(action)
+  <span class="code-key">context</span> = update(context, thought, result)</div>
+    </div>
+  </div>
+
+  <div class="arch-comp-detail" id="arch-detail-planning">
+    <div>
+      <div class="arch-detail-label">Planning Engine</div>
+      <div class="arch-detail-desc">Complex tasks can't be solved in one LLM call. The planning layer breaks goals into ordered sub-tasks, resolves dependencies, handles parallel execution where possible, and manages retries on failure. Good planning is the difference between an agent that demos well and one that works in production.</div>
+      <div class="arch-detail-principle">"Plan first. Act second. Validate always — never assume a step succeeded."</div>
+    </div>
+    <div>
+      <div class="arch-detail-label">Key Technologies</div>
+      <div class="arch-tech-tags">
+        <span class="arch-tech-tag-pill">Task graphs</span>
+        <span class="arch-tech-tag-pill">DAG execution</span>
+        <span class="arch-tech-tag-pill">Retry logic</span>
+        <span class="arch-tech-tag-pill">Checkpointing</span>
+        <span class="arch-tech-tag-pill">LangGraph</span>
+      </div>
+      <div class="arch-code-block"><span class="code-comment"># Task decomposition</span>
+<span class="code-key">plan</span>  = planner.decompose(goal)
+<span class="code-key">graph</span> = build_dag(plan.steps)
+<span class="code-key">for</span> step in topological_sort(graph):
+  <span class="code-key">result</span> = execute_with_retry(step)
+  <span class="code-key">if</span> not validate(result): replan()</div>
+    </div>
+  </div>
+
+  <div class="arch-comp-detail" id="arch-detail-action">
+    <div>
+      <div class="arch-detail-label">Action Layer</div>
+      <div class="arch-detail-desc">Actions are how agents affect the world — API calls, database writes, emails sent, tickets filed. Every action should be observable (logged), typed (structured output), and where possible, reversible. Tool definitions are the API contract between the LLM and your systems. Design them like public APIs.</div>
+      <div class="arch-detail-principle">"Every action should be observable, typed, and wherever possible — reversible."</div>
+    </div>
+    <div>
+      <div class="arch-detail-label">Key Technologies</div>
+      <div class="arch-tech-tags">
+        <span class="arch-tech-tag-pill">Tool calling</span>
+        <span class="arch-tech-tag-pill">JSON schema</span>
+        <span class="arch-tech-tag-pill">Audit logs</span>
+        <span class="arch-tech-tag-pill">Idempotency</span>
+        <span class="arch-tech-tag-pill">Structured output</span>
+      </div>
+      <div class="arch-code-block"><span class="code-comment"># Tool definition pattern</span>
+<span class="code-key">tool</span> = {
+  <span class="code-val">"name"</span>: <span class="code-val">"refund_charge"</span>,
+  <span class="code-val">"input_schema"</span>: RefundSchema,
+  <span class="code-val">"idempotency_key"</span>: <span class="code-val">True</span>,
+  <span class="code-val">"audit_log"</span>: <span class="code-val">True</span>,
+}</div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="divider"></div>
+
 <!-- HOW IT WORKS -->
 <div class="section-wrap" id="how-it-works">
   <div class="section-label">How it works</div>
@@ -2172,7 +2578,7 @@
 <div class="multiagent-wrap" id="multi-agent">
   <div class="section-label" style="text-align:center;margin-bottom:1rem;">Agent Networks</div>
   <h2 class="section-title" style="text-align:center;">Agents that talk to agents</h2>
-  <p class="section-sub" style="text-align:center;margin-bottom:0;">One intent can cascade across a coordinated network of specialists — no human in the loop.</p>
+  <p class="section-sub" style="text-align:center;margin-bottom:0;white-space:nowrap;max-width:none;">One intent can cascade across a coordinated network of specialists — no human in the loop.</p>
 
   <div class="multiagent-canvas">
 
@@ -2338,17 +2744,30 @@
 
   <div class="multiagent-capabilities">
     <div class="ma-cap">
-      <div class="ma-cap-icon">🔀</div>
+      <div class="ma-cap-icon-box">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#a080ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v3m0 0-4 4m4-4 4 4M6 10v4m12-4v4M6 14l-3 3m3-3 3 3m6-3 3 3m-3-3-3 3"/>
+        </svg>
+      </div>
       <div class="ma-cap-title">Parallel Execution</div>
       <div class="ma-cap-desc">Multiple agents work simultaneously on different sub-tasks and merge results.</div>
     </div>
     <div class="ma-cap">
-      <div class="ma-cap-icon">🔁</div>
+      <div class="ma-cap-icon-box">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#a080ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c-1.66 0-3-4.03-3-9s1.34-9 3-9m0 18c1.66 0 3-4.03 3-9s-1.34-9-3-9m-9 9a9 9 0 0 1 9-9"/>
+          <polyline points="16 8 21 8 21 3"/>
+        </svg>
+      </div>
       <div class="ma-cap-title">Feedback Loops</div>
-      <div class="ma-cap-desc">Agents can query each other, validate outputs, and re-route if confidence drops.</div>
+      <div class="ma-cap-desc">Agents query each other, validate outputs, and re-route if confidence drops.</div>
     </div>
     <div class="ma-cap">
-      <div class="ma-cap-icon">🧠</div>
+      <div class="ma-cap-icon-box">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#a080ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 9v4c0 1.66 4.03 3 9 3s9-1.34 9-3V9"/><path d="M3 13v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </div>
       <div class="ma-cap-title">Shared Memory</div>
       <div class="ma-cap-desc">All agents in a chain share context so no information is lost across handoffs.</div>
     </div>
@@ -2362,7 +2781,7 @@
 <div class="agent-wrap" id="try-it">
   <div class="section-label" style="text-align:center;margin-bottom:1rem;">Live Agents</div>
   <h2 class="section-title" style="text-align:center;">Three AI agents, built with Claude</h2>
-  <p class="section-sub" style="text-align:center;margin-bottom:2.5rem;">Real outputs. Real AI. Try each agent below — the same kind of tooling I build for product teams.</p>
+  <p class="section-sub" style="text-align:center;margin-bottom:2.5rem;white-space:nowrap;max-width:none;">Real outputs. Real AI. Try each agent below — the same kind of tooling we build for product and engineering teams.</p>
 
   <div class="agent-terminal">
     <div class="agent-terminal-bar">
@@ -3093,6 +3512,21 @@
     }
   }
 
+
+
+  function toggleArchComp(id) {
+    const detail = document.getElementById('arch-detail-' + id);
+    const allDetails = document.querySelectorAll('.arch-comp-detail');
+    const allCards = document.querySelectorAll('.arch-comp-card');
+    const isOpen = detail.classList.contains('open');
+    allDetails.forEach(d => d.classList.remove('open'));
+    allCards.forEach(c => c.classList.remove('active'));
+    if (!isOpen) {
+      detail.classList.add('open');
+      const card = document.querySelector('[onclick="toggleArchComp(\'' + id + '\')"]');
+      if (card) card.classList.add('active');
+    }
+  }
 
   // ── AGENT DEMO ──
   const WORKER_URL = 'https://intentai-proxy.rojomba17.workers.dev';
