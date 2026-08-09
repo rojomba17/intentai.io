@@ -9,6 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="intentai-mark-v2.svg">
   <link rel="apple-touch-icon" href="favicon-192.png">
   <meta name="description" content="IntentAI reads customer signals in real time, identifies what they need, and instantly routes them to the AI agent built to act." />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.363.0/dist/umd/lucide.min.js"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -82,16 +83,34 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 2px;
       list-style: none;
     }
     .nav-links a {
-      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #555568;
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 13px;
+      border-radius: 8px;
+      transition: all 0.2s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--purple); opacity: 0;
+      transition: opacity 0.2s; flex-shrink: 0;
+      display: inline-block;
+    }
+    .nav-links a:hover { color: #c0bdf8; }
+    .nav-links a:hover .nav-dot { opacity: 0.5; }
+    .nav-links a.nav-active { color: var(--text); }
+    .nav-links a.nav-active .nav-dot { opacity: 1; }
 
     .btn-nav {
       background: var(--purple);
@@ -2445,10 +2464,10 @@
 
 </svg><div class="nav-wordmark"><div class="nav-brand">intent<span>AI</span></div><div class="nav-tagline">DETECT · ROUTE · ACTIVATE</div></div></a>
   <ul class="nav-links">
-    <li><a href="#how-it-works">How it works</a></li>
-    <li><a href="#use-cases">Capabilities</a></li>
-    <li><a href="#agent-architecture">Architecture</a></li>
-    <li><a href="#waitlist">Early access</a></li>
+    <li><a href="#how-it-works"><span class="nav-dot"></span>How it works</a></li>
+    <li><a href="#use-cases"><span class="nav-dot"></span>Capabilities</a></li>
+    <li><a href="#agent-architecture"><span class="nav-dot"></span>Architecture</a></li>
+    <li><a href="#waitlist"><span class="nav-dot"></span>Early access</a></li>
   </ul>
   <a href="#" onclick="event.preventDefault();openDemoModal()" class="btn-nav">Request a demo</a>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
