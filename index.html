@@ -2117,6 +2117,194 @@
       animation: fadeUp 0.4s ease 0.4s forwards;
     }
     .agent-powered span { color: var(--purple); }
+
+    /* ══════════════════════════════════════════
+       MOBILE RESPONSIVE — injected block
+       All rules only activate below breakpoints.
+       Desktop (>768px) is completely unaffected.
+    ══════════════════════════════════════════ */
+
+    /* ── HAMBURGER BUTTON ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 8px;
+      flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      height: 1.5px;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── MOBILE MENU DRAWER ── */
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(7,7,15,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem 1.5rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
+    }
+    .nav-mobile-menu a:last-of-type { border-bottom: none; }
+    .nav-mobile-menu a:hover { color: var(--text); }
+    .nav-mobile-cta {
+      margin-top: 1.25rem;
+      background: var(--purple);
+      color: #fff !important;
+      text-align: center;
+      padding: 0.75rem 1rem !important;
+      border-radius: 10px;
+      font-weight: 600 !important;
+      font-size: 0.95rem !important;
+      border-bottom: none !important;
+    }
+
+    /* ── BREAKPOINT: 768px ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav {
+        padding: 0.75rem 1.25rem;
+        height: 64px;
+      }
+      .nav-logo svg { width: 52px !important; height: 52px !important; }
+      .nav-brand { font-size: 1.6rem; }
+      .nav-tagline { display: none; }
+      .nav-wordmark { margin-left: -18px; }
+      .nav-links { display: none !important; }
+      .btn-nav { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero */
+      .hero { padding: 7rem 1.25rem 3rem; }
+      h1 { font-size: 2.2rem; }
+      .hero-sub { font-size: 1rem; }
+      .hero-ctas { gap: 0.625rem; }
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-ghost { width: 100%; text-align: center; }
+      .hero-demo { margin-bottom: 2rem; }
+      .stats { gap: 1.5rem; }
+      .stat-num { font-size: 1.3rem; }
+
+      /* Sections */
+      .section-wrap { padding: 3.5rem 1.25rem; }
+      .section-title { font-size: 1.65rem; }
+      .section-sub { font-size: 0.95rem; }
+
+      /* How it works */
+      .steps { grid-template-columns: 1fr; margin-top: 2rem; }
+
+      /* Architecture pipeline */
+      .arch-wrap { padding: 3.5rem 1.25rem; }
+      .arch-pipeline {
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        justify-content: flex-start;
+        padding: 1.25rem;
+      }
+      .arch-connector { display: none; }
+      .arch-stage { min-width: 130px; }
+      .arch-tech-stack { grid-template-columns: 1fr 1fr; }
+      .arch-metrics { gap: 0.625rem; }
+      .arch-metric-pill { font-size: 0.75rem; }
+
+      /* Use cases */
+      .use-cases-grid { grid-template-columns: 1fr 1fr; margin-top: 2rem; }
+
+      /* Multi-agent */
+      .multiagent-wrap { padding: 3.5rem 1.25rem; }
+      .multiagent-canvas { grid-template-columns: 1fr; gap: 1.5rem; }
+      .multiagent-capabilities { grid-template-columns: 1fr 1fr; }
+
+      /* Live agent demo */
+      .agent-wrap { padding: 3.5rem 1.25rem; }
+      .agent-tabs { overflow-x: auto; }
+      .agent-tab { font-size: 0.75rem; padding: 0.75rem 0.35rem; }
+      .agent-result-grid { grid-template-columns: 1fr; }
+      .crit-cols { grid-template-columns: 1fr; }
+
+      /* Agent arch simulation */
+      .agentarch-wrap { padding: 3.5rem 1.25rem; }
+      .arch-comp-grid { grid-template-columns: repeat(3, 1fr); }
+      .arch-comp-detail.open { grid-template-columns: 1fr; gap: 1rem; }
+      .agentarch-layer { flex-wrap: wrap; gap: 0.5rem; }
+      .agentarch-layer-name { min-width: unset; }
+      .sim-body { grid-template-columns: 1fr; }
+      .sim-left { border-right: none; border-bottom: 1px solid var(--border); }
+
+      /* Waitlist / CTA */
+      .cta-wrap { padding: 3rem 1.25rem 4rem; }
+      .cta-box { padding: 2.5rem 1.25rem; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-form input[type="email"],
+      .waitlist-form button { width: 100%; }
+
+      /* Modals */
+      .modal-overlay,
+      .step-overlay,
+      .demo-overlay { padding: 0.75rem; align-items: flex-end; }
+      .modal-box,
+      .step-modal-box { border-radius: 16px 16px 0 0; max-height: 92vh; }
+      .demo-modal-box { border-radius: 16px 16px 0 0; }
+      .modal-header { padding: 1.25rem 1.25rem 1rem; }
+      .modal-body { padding: 1.25rem 1.25rem 1.5rem; }
+      .modal-caps { grid-template-columns: 1fr; }
+      .step-modal-head { padding: 1.25rem; }
+      .step-body { padding: 0 1.25rem 0.5rem; }
+      .anim-window { margin: 1rem 1.25rem; }
+      .step-stats { margin: 0 1.25rem 1.25rem; }
+      .step-modal-cta { margin: 1.25rem 1.25rem 1.5rem; flex-direction: column; }
+      .demo-modal-head { padding: 1.25rem 1.25rem 1rem; }
+      .demo-form { padding: 1.25rem; }
+      .demo-row { grid-template-columns: 1fr; }
+
+      /* Footer */
+      footer { flex-direction: column; text-align: center; padding: 1.5rem 1.25rem; }
+    }
+
+    /* ── BREAKPOINT: 480px (small phones) ── */
+    @media (max-width: 480px) {
+      h1 { font-size: 1.9rem; }
+      .use-cases-grid { grid-template-columns: 1fr; }
+      .multiagent-capabilities { grid-template-columns: 1fr; }
+      .arch-comp-grid { grid-template-columns: repeat(2, 1fr); }
+      .arch-tech-stack { grid-template-columns: 1fr; }
+      .agent-tab .tab-icon { display: none; }
+      .agent-tab { font-size: 0.72rem; }
+      .stats { flex-direction: column; gap: 1.25rem; align-items: center; }
+      .section-wrap { padding: 3rem 1rem; }
+      .hero { padding: 6.5rem 1rem 2.5rem; }
+      .demo-titlebar .demo-title-text { display: none; }
+    }
+
   </style>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "954e01a5ae41452ea5cc3680e9b198ed"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
@@ -2262,7 +2450,19 @@
     <li><a href="#waitlist">Early access</a></li>
   </ul>
   <a href="#" onclick="event.preventDefault();openDemoModal()" class="btn-nav">Request a demo</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV MENU -->
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="#how-it-works" onclick="closeMobileMenu()">How it works</a>
+  <a href="#use-cases" onclick="closeMobileMenu()">Capabilities</a>
+  <a href="#agent-architecture" onclick="closeMobileMenu()">Architecture</a>
+  <a href="#waitlist" onclick="closeMobileMenu()">Early access</a>
+  <a href="#" class="nav-mobile-cta" onclick="event.preventDefault();closeMobileMenu();openDemoModal()">Request a demo</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -3981,6 +4181,25 @@
   }
 
 
+
+
+  // ── Mobile nav hamburger ──
+  function closeMobileMenu() {
+    document.getElementById('nav-mobile-menu').classList.remove('open');
+    document.getElementById('nav-hamburger').classList.remove('open');
+  }
+  document.getElementById('nav-hamburger').addEventListener('click', function() {
+    this.classList.toggle('open');
+    document.getElementById('nav-mobile-menu').classList.toggle('open');
+  });
+  // Close mobile menu on outside click
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('nav-mobile-menu');
+    var btn = document.getElementById('nav-hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
 
 </script>
 
